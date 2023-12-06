@@ -1,0 +1,118 @@
+@use 'sass:map';
+@import '../palette.module';
+
+.MainContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 !important;
+}
+
+.AuthContainer {
+  max-width: 1440px;
+  padding: 0 60px;
+
+  @media screen and (max-width: 900px) {
+    padding: 10px;
+  }
+
+  .Header {
+    margin: 0;
+    padding: 4px 4px 10px 4px;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid + map.get($gray, 100);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &Body {
+    min-height: 45vh;
+    margin: 26px 0px 0 0px;
+    @media screen and (max-width: 1200px) {
+      padding: 10px 20px 0 0;
+      margin: 0;
+    }
+    @media screen and (max-width: 900px) {
+      padding: 0;
+      justify-content: center;
+    }
+    .AuthForm {
+      padding: 0px 10px 10px 10px;
+      @media screen and (max-width: 1200px) {
+        margin-top: 10px;
+      }
+      @media screen and (max-width: 1024px) {
+        padding: 0;
+      }
+
+      @media screen and (max-width: 900px) {
+        background-color: transparent;
+        box-shadow: none;
+        display: grid;
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      &Link > a,
+      &Link > button,
+      &Link > span,
+      &Link > div {
+        // only link or button or span or div is accepted for children, OW style must be included
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+        margin-left: 18px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 21px;
+        letter-spacing: 0em;
+        text-align: left;
+        text-decoration: none;
+        color: map.get($gray, 500);
+        svg {
+          margin-right: 5px;
+        }
+
+        @media screen and (max-width: 1200px) {
+          margin-bottom: 10px;
+        }
+      }
+
+      .Children {
+        margin: 25px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        @media screen and (max-width: 1200px) {
+          margin: 10px 0;
+        }
+      }
+    }
+
+    .ImageContainer,
+    .AuthForm {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      .ImageCover {
+        width: 100%;
+        height: 90%;
+        object-fit: contain;
+
+        @media screen and (max-width: 1200px) {
+          width: 100%;
+          height: 85%;
+          object-fit: contain;
+        }
+      }
+    }
+    .ImageContainer {
+      @media screen and (max-width: 900px) {
+        display: none;
+      }
+    }
+  }
+}

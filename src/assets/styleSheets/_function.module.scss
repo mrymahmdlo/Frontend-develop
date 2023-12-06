@@ -1,0 +1,29 @@
+// Return primary color code via $key parameter
+@function getPrimary($key) {
+  @return map-get($primary, $key);
+}
+
+// Return success color code via $key parameter
+@function getSuccess($key) {
+  @return map-get($success, $key);
+}
+
+// Return info color code via $key parameter
+@function getInfo($key) {
+  @return map-get($info, $key);
+}
+
+// Return warning color code via $key parameter
+@function getWarning($key) {
+  @return map-get($warning, $key);
+}
+
+// Return error color code via $key parameter
+@function getError($key) {
+  @return map-get($error, $key);
+}
+
+// Return gray color code via $key parameter
+@function getGray($key) {
+  @return map-get($gray, $key);
+}

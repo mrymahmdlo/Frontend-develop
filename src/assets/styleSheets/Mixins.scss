@@ -1,0 +1,13 @@
+@mixin hideMD {
+    @media screen and (max-width: 576px) {
+        display: none !important;
+    }
+}
+
+@mixin showMD($display) {
+    display: $display;
+
+    @media screen and (min-width: 576px) {
+        display: none  !important;
+    }
+}

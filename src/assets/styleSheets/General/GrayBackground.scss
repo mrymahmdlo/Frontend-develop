@@ -1,0 +1,6 @@
+@use 'sass:map';
+@import '../palette.module';
+
+body {
+  background-color: map.get($gray, 100) !important;
+}

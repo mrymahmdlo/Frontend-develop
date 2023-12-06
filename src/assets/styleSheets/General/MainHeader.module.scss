@@ -1,0 +1,36 @@
+@use 'sass:map';
+@import '../palette.module';
+
+.HeaderContainer {
+  box-shadow: none;
+  display: inline;
+  height: 72px;
+
+  .HeaderApp {
+    box-shadow: 0px 10px 40px 0px #8a9ea840;
+    padding: 0 32px;
+    display: flex;
+
+    .Items {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 6px;
+      max-width: 1106px;
+
+      .Logo {
+        color: map.get($gray, 500);
+        -webkit-text-decoration: none;
+        text-decoration: none;
+        text-decoration-color: none;
+        position: relative;
+
+        span {
+          position: absolute;
+          top: -5px;
+          right: -15px;
+        }
+      }
+    }
+  }
+}

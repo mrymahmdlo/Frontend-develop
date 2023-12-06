@@ -1,0 +1,25 @@
+@use 'sass:map';
+@import './palette.module';
+
+@mixin global {
+  border-radius: 12px !important;
+  width: 327px;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+}
+
+.mui-1pl4u8t-MuiPaper-root-MuiAlert-root {
+  @include global();
+}
+
+.mui-1frpxba-MuiPaper-root-MuiAlert-root {
+  @include global();
+  color: #fff !important;
+  background-color: map.get($success, 500) !important;
+}
+
+.mui-1ipaz1c-MuiPaper-root-MuiAlert-root {
+  @include global();
+  color: #fff !important;
+  background-color: #000 !important;
+}

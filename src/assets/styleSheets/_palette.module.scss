@@ -1,0 +1,98 @@
+// Primary colors
+$primary: (
+  100: #e6f4ff,
+  200: #d2ebff,
+  300: #9fd4ff,
+  400: #6cbdff,
+  500: #1da1f3,
+  600: #0074d2,
+  700: #00579f,
+  800: #003b6c,
+  900: #001f39
+);
+// Success colors
+$success: (
+  100: #81fdd4,
+  200: #5efdc9,
+  300: #3bfcbd,
+  400: #18fcb1,
+  500: #03c988,
+  600: #02a670,
+  700: #028358,
+  800: #015f41,
+  900: #013c29
+);
+// Info colors
+$info: (
+  100: #dcf6ff,
+  200: #aeebfe,
+  300: #81e0fe,
+  400: #53d5fe,
+  500: #02b9f3,
+  600: #0296c5,
+  700: #017498,
+  800: #01516a,
+  900: #012e3d
+);
+// Warning colors
+$warning: (
+  100: #fff1dc,
+  200: #fedeae,
+  300: #fecc81,
+  400: #feba53,
+  500: #f39302,
+  600: #c57702,
+  700: #985c01,
+  800: #6a4001,
+  900: #3d2501
+);
+// Error colors
+$error: (
+  100: #ffdce7,
+  200: #feaec7,
+  300: #fe81a7,
+  400: #fe5388,
+  500: #f3024c,
+  600: #c5023e,
+  700: #980130,
+  800: #6a0121,
+  900: #3d0113
+);
+// Gray colors
+$gray: (
+  100: #f4f6fa,
+  200: #e5eaef,
+  300: #8e98a8,
+  400: #6a7890,
+  500: #505b74,
+  600: #33435a,
+  700: #263248,
+  800: #172334,
+  900: #0b1524
+);
+
+:export {
+  @each $name, $color in $primary {
+    primary#{$name}: $color;
+  }
+
+  @each $name, $color in $success {
+    success#{$name}: $color;
+  }
+
+  @each $name, $color in $info {
+    info#{$name}: $color;
+  }
+
+  @each $name, $color in $warning {
+    warning#{$name}: $color;
+  }
+
+  @each $name, $color in $error {
+    error#{$name}: $color;
+  }
+
+  @each $name, $color in $gray {
+    gray#{$name}: $color;
+  }
+}

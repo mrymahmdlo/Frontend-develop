@@ -1,0 +1,127 @@
+@use 'sass:map';
+
+@import './reset.module';
+@import './palette.module';
+@import './function.module';
+@import './spinner.module';
+@import './colorSpinner.module';
+@import './smooth-slider.module';
+@import './General/Carousel.module.scss';
+@import './alret.module.scss';
+
+html,
+body {
+  background-color: white !important;
+}
+
+// Modal
+h5,
+.modal-title {
+  color: getGray(800);
+  font-weight: 600 !important;
+  line-height: 2.25rem !important;
+}
+
+.modal-header-title {
+  color: getGray(700);
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+}
+
+p.login-link-container,
+p.choose-favorite {
+  font-size: 1.125rem;
+  font-weight: 500;
+
+  span {
+    color: getGray(600);
+  }
+}
+
+a,
+.link {
+  text-decoration: none;
+  cursor: pointer;
+  color: getPrimary(500);
+}
+
+// Error message
+.error-message {
+  color: getError(500);
+  font-weight: 500 !important;
+}
+
+// Typography
+.separatory-text {
+  color: getGray(300);
+}
+
+.text-gray-600 {
+  color: getGray(600);
+}
+
+.text-gray-700 {
+  color: getGray(700);
+}
+
+// Rule checker
+.rule-checker-label {
+  @extend .text-gray-700;
+  font-weight: 500 !important;
+}
+
+// mobile picker
+.mobile-picker {
+  @extend .text-gray-700;
+  font-weight: 600;
+  background-color: getGray(100);
+  mask-image: none !important;
+  border-radius: 0.75rem;
+
+  div.active {
+    color: getPrimary(500);
+  }
+
+  & > div:last-child {
+    background-color: getPrimary(500);
+    opacity: 0.08;
+    border-radius: inherit;
+  }
+}
+
+// Location modal
+.location-contianer {
+  background-color: getGray(100);
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+
+  & > div {
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .location-country {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: getGray(800);
+  }
+
+  .location-state > span {
+    @extend .text-gray-700;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+}
+
+// User agreement and policies
+.policy-box {
+  @extend .text-gray-600;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.75rem;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  background-color: getGray(100);
+}

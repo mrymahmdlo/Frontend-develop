@@ -1,0 +1,88 @@
+@use 'sass:map';
+@import './palette.module';
+
+.HelpCenterContainer {
+  display: grid !important;
+  place-items: center;
+  box-shadow: none;
+
+  @media screen and (max-width: 900px) {
+    place-items: baseline;
+  }
+
+  .CardContainer {
+    border-radius: 24px;
+    margin: 50px 0;
+    max-width: 800px;
+    width: 100%;
+    min-width: 280px;
+    padding: 28px;
+    box-shadow: none;
+    background-color: white;
+    min-height: 500px;
+
+    @media screen and (max-width: 900px) {
+      margin: 0;
+      max-width: 900px;
+      padding: 0;
+    }
+
+    .TitleContainer {
+      padding-bottom: 28px;
+
+      .BackIconButton {
+        padding: 0;
+        width: 25px;
+        height: 25px;
+        justify-content: flex-start;
+      }
+
+      .Title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      @media screen and (max-width: 900px) {
+        border-bottom: 2px solid map.get($gray, 200);
+        padding: 14px;
+      }
+    }
+
+    .Accordian {
+      border: none;
+      box-shadow: none;
+      padding: 2px;
+      border-radius: 8px;
+      border-color: transparent;
+      margin: 18px 0;
+      position: inherit;
+
+      @media screen and (max-width: 900px) {
+        padding: 0 14px;
+        margin: 24px 0;
+      }
+
+      &Summary {
+        background-color: map.get($primary, 100);
+        border-radius: 8px;
+        min-height: 48px !important;
+        div {
+          margin: 4px 0 !important;
+        }
+        .AccordianTitle {
+          font-size: 1rem;
+          font-weight: 600;
+          line-height: 24px;
+          letter-spacing: 0px;
+          text-align: left;
+          color: map.get($primary, 500);
+        }
+      }
+
+      &Details {
+        background-color: white;
+      }
+    }
+  }
+}
