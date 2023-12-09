@@ -60,17 +60,17 @@ export default function LogInInputs() {
         if (tokens) {
           newToken = JSON.parse(tokens);
           newToken?.push({
-            [res.data.email]: {
-              access: res.data.access,
-              refresh: res.data.refresh
+            [res.profile.email]: {
+              access: res.accessToken,
+              refresh: res.refreshToken
             }
           });
         } else {
           newToken = [
             {
-              [res.data.email]: {
-                access: res.data.access,
-                refresh: res.data.refresh
+              [res.profile.email]: {
+                access: res.accessToken,
+                refresh: res.refreshToken
               }
             }
           ];
@@ -79,11 +79,11 @@ export default function LogInInputs() {
         // Set new token
         setAppToken(newToken);
         // Set current account email
-        setCurrentAccountCookie(res.data.email);
+        setCurrentAccountCookie(res.profile.email);
 
         dispatch(
           showSnackbar({
-            message: res.Success,
+            message: 'Successful LogIn',
             severity: 'success'
           })
         );

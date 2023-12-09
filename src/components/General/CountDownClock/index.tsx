@@ -11,7 +11,7 @@ interface IntProps {
   onComplete: () => void;
 }
 
-const CountDownClock = ({ second = 120, onComplete }: IntProps) => {
+const CountDownClock = ({ second = 300, onComplete }: IntProps) => {
   const [now] = useState(Date.now());
 
   return (

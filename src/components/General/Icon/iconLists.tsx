@@ -48,7 +48,7 @@ import Tether from '@/assets/svgs/tether.svg';
 import Twitter from '@/assets/svgs/twitter.svg';
 import Unisex from '@/assets/svgs/unisex.svg';
 import WhiteApple from '@/assets/svgs/white-apple.svg';
-import WhiteLogo from '@/assets/svgs/white-logo.svg';
+// import WhiteLogo from '@/assets/svgs/white-logo.svg';
 import Women from '@/assets/svgs/women.svg';
 import BlueTick from '@/assets/svgs/blue-tick.svg';
 import SelectArrow from '@/assets/svgs/select-arrow.svg';
@@ -65,7 +65,7 @@ export const icons = {
   closeCircle: <CloseCircle />,
   logo: <Logo />,
   arrowLeft: <ArrowLeft />,
-  whiteLogo: <WhiteLogo />,
+  whiteLogo: <Logo />,
   grayFaceBook: <GrayFaceBook />,
   grayInstagram: <GrayInstagram />,
   grayLinkedIn: <GrayLinkedIn />,

@@ -5,8 +5,8 @@ import { useState } from 'react';
 // local imports
 import { useAppDispatch } from '@/context';
 import { showSnackbar } from '@/context/slices/snackbarSlice';
-import { TabsValue } from '../ForgetPasswordForm';
 import apiHandler, { IntErrors } from '@/utils/apiHandler';
+import { TabsValue } from '../ForgetPasswordForm';
 
 type Stages = 'forget-password' | 'send-otp' | 'reset-password';
 
@@ -35,8 +35,8 @@ export default function useForgetPassword() {
       type: tab
     });
     setShowSpinner(true);
-    apiHandler('/api/auth/forget-password/', 'POST', {
-      identifier: user
+    apiHandler('/user/resetPassword', 'POST', {
+      mobile: user
     })
       .then(() => {
         dispatch(
@@ -76,19 +76,19 @@ export default function useForgetPassword() {
     setStage('reset-password');
   }
 
-  function changePassword(password: string, repPassword: string) {
+  function changePassword(password: string) {
     if (showSpinner) return;
 
     if (!identifier.token) return;
 
     setShowSpinner(true);
 
-    apiHandler('/api/auth/forget-password/change-password/', 'POST', {
-      token: identifier.token,
+    apiHandler('/user/updatePassword', 'POST', {
+      verificationCode: identifier.token,
       // eslint-disable-next-line camelcase
-      new_password: password,
+      newPassword: password,
       // eslint-disable-next-line camelcase
-      confirm_password: repPassword
+      mobile: identifier.id
     })
       .then(() => {
         router.push('/log-in');

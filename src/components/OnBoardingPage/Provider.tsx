@@ -1,4 +1,4 @@
-import AuthProviderBtns from '@/components/General/AuthProviderBtns';
+// import AuthProviderBtns from '@/components/General/AuthProviderBtns';
 import { Button, Grid, SxProps } from '@mui/material';
 
 export default function Provider() {
@@ -29,10 +29,10 @@ export default function Provider() {
           Sign up
         </Button>
       </Grid>
-
+{/* 
       <Grid item xs={12}>
         <AuthProviderBtns />
-      </Grid>
+      </Grid> */}
 
       <Grid item xs={12}>
         <Button

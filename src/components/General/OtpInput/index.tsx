@@ -16,7 +16,7 @@ export function matchIsNumeric(text: string) {
 
 export default function OtpInput({
   value,
-  length = 6,
+  length = 4,
   onChange,
   errorMessage
 }: IntProps) {

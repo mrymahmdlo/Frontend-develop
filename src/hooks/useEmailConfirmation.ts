@@ -2,7 +2,7 @@
 
 import { useAppDispatch } from '@/context';
 import { hideSnackbar, showSnackbar } from '@/context/slices/snackbarSlice';
-import { apiHandler, setAppToken, setCurrentAccountCookie } from '@/utils';
+import { apiHandler } from '@/utils';
 import { IntError } from '@/utils/apiHandler';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -12,18 +12,11 @@ type OtpType = {
   errorMessage: string;
 };
 
-type SuccessOtpResultType = {
-  Success: string;
-  token?: string;
-  data: {
-    access: string;
-    refresh: string;
-  };
-};
+
 
 export default function useEmailConfirmation(
   userEmail: string,
-  goToNextStep: (token?: string) => void,
+  goToNextStep: (token?: string, mobile?:string) => void,
   useForgetPasswordURI?: boolean
 ) {
   const dispatch = useAppDispatch();
@@ -44,7 +37,7 @@ export default function useEmailConfirmation(
     // Update otp value
     setOtp(newValue);
 
-    if (value.length === 6) {
+    if (value.length === 4) {
       if (isExpired) {
         // Handle expiration validation
         setOtp({ ...newValue, errorMessage: t('Otp expired') });
@@ -58,21 +51,21 @@ export default function useEmailConfirmation(
         );
 
         try {
-          const result = (await apiHandler(
-            useForgetPasswordURI
-              ? '/api/auth/forget-password/otp/'
-              : '/api/auth/signup/verify-otp/',
-            'POST',
-            useForgetPasswordURI
-              ? {
-                  identifier: userEmail,
-                  code: value
-                }
-              : {
-                  email: userEmail,
-                  token: value
-                }
-          )) as SuccessOtpResultType;
+          // const result = (await apiHandler(
+          //   useForgetPasswordURI
+          //     ? '/api/auth/forget-password/otp/'
+          //     : '/api/auth/signup/verify-otp/',
+          //   'POST',
+          //   useForgetPasswordURI
+          //     ? {
+          //         identifier: userEmail,
+          //         mobile: value
+          //       }
+          //     : {
+          //         email: userEmail,
+          //         token: value
+          //       }
+          // )) as SuccessOtpResultType;
 
           // #TODO remove this commont after add account complete
           // Get latest tokens if exists
@@ -87,20 +80,20 @@ export default function useEmailConfirmation(
           // }
 
           // Set new token
-          const newToken = [{ [userEmail]: result.data }];
+          // const newToken = [{ [userEmail]: result.data }];
 
-          // Set new token
-          setAppToken(newToken);
-          // Set current account email
-          setCurrentAccountCookie(userEmail);
+          // // Set new token
+          // setAppToken(newToken);
+          // // Set current account email
+          // setCurrentAccountCookie(userEmail);
 
+          // // Go to next step when everythings ok
+          // if (result.token) {
+          //   goToNextStep(result.token);
+          // } else {
           // Go to next step when everythings ok
-          if (result.token) {
-            goToNextStep(result.token);
-          } else {
-            // Go to next step when everythings ok
-            goToNextStep();
-          }
+            goToNextStep(value,userEmail);
+          // }
         } catch (err) {
           const error = err as IntError;
           let firstError = error.errors;

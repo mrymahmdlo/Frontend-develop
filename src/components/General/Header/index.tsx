@@ -31,7 +31,7 @@ export default function MainHeader(props: HeaderProps) {
           <Container className={classes.Items}>
             <Toolbar disableGutters>
               <Link href='/' className={classes.Logo}>
-                <Icon name='logo' w={110} h={26} view='0 0 110 29'></Icon>
+                <Icon name='logo' w={200} h={20}></Icon>
 
                 {/* Country code */}
                 {userCurrentLocation !== null &&

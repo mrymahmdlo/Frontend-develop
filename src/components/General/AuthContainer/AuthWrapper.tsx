@@ -44,7 +44,7 @@ export default function AuthWrapper(props: AuthContainerProps) {
                 </IconButton>
               )}
               {props.title ?? (
-                <Icon name='logo' w={110} h={26} view='0 0 110 29' />
+                <Icon name='logo' w={110} h={200} />
               )}
               <Box
                 width={

@@ -1,12 +1,12 @@
 'use client';
 
-import Link from 'next/link';
-import { SyntheticEvent, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 // mui imports
-import { Box, Grid, Stack, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 
 // style
 import classes from '@/assets/styleSheets/forget-password.module.scss';
@@ -14,10 +14,10 @@ import classes from '@/assets/styleSheets/forget-password.module.scss';
 // local imports
 import {
   CustomTextField,
-  SubmitButton,
-  TabPanel,
+  DotSpinner,
   Icon,
-  DotSpinner
+  SubmitButton,
+  TabPanel
 } from '@/components/General';
 import { forgetPasswordValidations as validations } from '@/utils/validations/forgetPasswordValidations';
 
@@ -36,22 +36,18 @@ export type TabsValue = 'email' | 'phoneNumber';
 export default function ForgetPasswordForm(props: ForgetPasswordFormProps) {
   const t = useTranslations();
 
-  const [tab, setTab] = useState<TabsValue>('email');
+  const [tab] = useState<TabsValue>('phoneNumber');
 
-  const handleChange = (event: SyntheticEvent, newValue: TabsValue) => {
-    setTab(newValue);
-  };
+  // const handleChange = (event: SyntheticEvent, newValue: TabsValue) => {
+  //   setTab(newValue);
+  // };
 
   const sendEmail: SubmitHandler<InputType> = (formData) => {
-    props.enterOtp(
-      tab === 'email' ? formData.email : formData.phoneNumber,
-      tab
-    );
+    props.enterOtp(formData.phoneNumber, tab);
   };
 
   function checkEntries() {
-    if (tab === 'email') return !watch('email');
-    else return !watch('phoneNumber');
+    return !watch('phoneNumber');
   }
 
   // Use react hook form to handle form
@@ -76,13 +72,11 @@ export default function ForgetPasswordForm(props: ForgetPasswordFormProps) {
           {t('Trouble logging in?')}
         </Typography>
         <Typography className={classes.Subtitle}>
-          {tab === 'email'
-            ? t('Trouble logging email')
-            : t('Trouble logging phone')}
+          {t('Trouble logging phone')}
         </Typography>
       </Box>
       <Box sx={{ width: '100%' }}>
-        <Tabs value={tab} onChange={handleChange} centered variant='fullWidth'>
+        {/* <Tabs value={tab} onChange={handleChange} centered variant='fullWidth'>
           <Tab
             sx={{ fontSize: { xs: '14px', sm: '18px' }, textTransform: 'none' }}
             label={t('Email')}
@@ -94,13 +88,12 @@ export default function ForgetPasswordForm(props: ForgetPasswordFormProps) {
             test-id='phone-tab'
             value={'phoneNumber'}
           />
-        </Tabs>
-        <TabPanel
+        </Tabs> */}
+        {/* <TabPanel
           index={'email'}
           value={tab}
           style={{ width: '100%', margin: '15px 0' }}
         >
-          {/* Email field */}
           <Controller
             control={control}
             name='email'
@@ -121,10 +114,10 @@ export default function ForgetPasswordForm(props: ForgetPasswordFormProps) {
               />
             )}
           />
-        </TabPanel>
+        </TabPanel> */}
         <TabPanel
-          index={'phoneNumber'}
           value={tab}
+          index={'phoneNumber'}
           style={{ width: '100%', margin: '15px 0' }}
         >
           {/* Phone Number field */}
