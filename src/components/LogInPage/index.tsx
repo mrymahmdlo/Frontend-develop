@@ -166,7 +166,7 @@ export default function LogInInputs() {
           style={{ marginTop: '0.5rem', fontSize: '14px' }}
           href='forget-password'
         >
-          Forget Password?
+          {t('Forget Password?')}
         </Link>
         {/* Submit btn */}
         <SubmitButton

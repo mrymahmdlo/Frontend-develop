@@ -10,9 +10,9 @@
   "Add Account": "Add Account",
 
   "B": "",
-  "Back to log in": "Back to log in",
-  "Back to on boarding": "Back to on boarding",
-  "Back to Sign up": "Back to sign up",
+  "Back to log in": "بازگشت به ورود",
+  "Back to on boarding": "بازگشت به صفحه اول",
+  "Back to Sign up": "بازگشت به ثبت نام",
 
   "C": "",
   "Choose your favorite markets": "Choose your favorite markets",
@@ -21,13 +21,13 @@
   "Continue with apple": "Continue with Apple",
   "Continue with google": "Continue with Google",
   "Cookie policy": "Cookie Policy",
-  "Can’t reset your password?": "Can’t reset your password?",
+  "Can’t reset your password?": "نمیتوانید رمز خود را بازیابی کنید ؟",
 
   "D": "",
   "Date of birth": "Date of Birth",
 
   "E": "",
-  "Email": "Email",
+  "Email": "ایمیل",
   "Email or username": "Email or username",
   "Email confirmation": "Email confirmation",
   "Enter confirmation code": "Enter confirmation code",
@@ -38,7 +38,7 @@
   "F": "",
   "Favorite market": "Favorite market",
   "Female": "Female",
-  "Forget Password?":"Forget Password?",
+  "Forget Password?":"فراموشی رمز ؟",
 
   "G": "",
   "Gender": "Gender",
@@ -48,10 +48,10 @@
 
   "L": "",
   "Location": "Location",
-  "Log in": "Log in",
+  "Log in": "ورود",
   "Log in with apple": "Log in with Apple",
   "Log in with google": "Log in with Google",
-  "Login to DGB": "Login to DGB",
+  "Login to DGB": "ورود به دیجی‌برق",
   "login code sent": "login code sent",
 
   "In Progress": "In Progress",
@@ -60,7 +60,7 @@
   "Male": "Male",
 
   "N": "",
-  "Next": "Next",
+  "Next": "تائید",
   "No match found": "No match found",
   "No space": "Does not contain any spaces.",
   "Not now": "Not now",
@@ -68,16 +68,16 @@
   "New password is not macthed": "New password is not macthed",
 
   "O": "",
-  "Or": "or",
-  "OR": "OR",
+  "Or": "یا",
+  "OR": "یا",
   "OK": "OK",
   "Other": "Other",
   "Otp expired": "Confirmation code has been expired, please click on Resend Code button",
 
   "P": "",
   "Phone": "Phone",
-  "Phone number": "Phone number",
-  "Password": "Password",
+  "Phone number": "شماره تماس",
+  "Password": "رمز",
   "Password characters": "8-32 characters",
   "Privacy policy": "Privacy Policy",
 
@@ -90,18 +90,18 @@
   "Save password": "Save password",
   "Search": "Search",
   "Select between 2 and 5": "You must choose at least 2 and at most 5 items from the specified list",
-  "Sign up": "Sign up",
-  "Sign up to DGB": "Sign up to DGB",
+  "Sign up": "ثبت نام",
+  "Sign up to DGB": "ثبت نام در دیجی‌برق",
   "Sign up with apple": "Sign up with Apple",
   "Sign up with google": "Sign up with Google",
   "Start": "Start",
   "Sign In": "Sign In",
-  "Sign Up": "Sign Up",
+  "Sign Up": "ثبت نام",
 
   "T": "",
-  "Trouble logging in?": "Trouble logging in?",
+  "Trouble logging in?": "نمیتوانید وارد شوید ؟",
   "Trouble logging email": "Enter your username or email and we’ll send you a link to get back into your account.",
-  "Trouble logging phone": "Enter your phone number and we’ll send you a link to get back into your account.",
+  "Trouble logging phone": ".شماره تماس خود را وارد کنید تا کد ورود برای شما ارسال شود",
 
   "to get you back into your account.": "to get you back into your account.",
 

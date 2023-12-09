@@ -11,7 +11,7 @@ interface IntProps {
   };
 }
 
-const locales = ['en'];
+const locales = ['fa'];
 
 export const metadata: Metadata = {
   title: 'DGB',

@@ -52,7 +52,7 @@ export default function SignUpStepOne({ goToNextStep }: IntProps) {
         {/* Login link */}
         <Typography className='login-link-container'>
           <span>{t('Or')} </span>
-          <Link href='log-in'>Log in</Link>
+          <Link href='log-in'>{t('Log in')}</Link>
         </Typography>
       </div>
 
