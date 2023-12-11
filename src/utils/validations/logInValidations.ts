@@ -17,5 +17,12 @@ export const logInValidations = {
   },
   password: {
     required: message.required('Password')
+  },
+  mobile: {
+    validate: {
+      matchPattern: (v: string) => {
+        return message.mobile(v);
+      }
+    }
   }
 };

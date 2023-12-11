@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 
 // mui imports
-import { Box, Button, Grid, Stack, Typography } from '@mui/material';
+import { Box, Button, Grid, Stack } from '@mui/material';
 
 // local imports
 import {
@@ -17,7 +17,7 @@ import {
 // style
 import classes from '@/assets/styleSheets/forget-password.module.scss';
 import { patterns } from '@/utils/validations/validationMessageHandler';
-import useResetPassword from './hooks/useResetPassword';
+import usePasswordSignUp from './hooks/usePasswordSignUp';
 
 interface NewPasswordFormProps {
   changePassword: (password: string, repPassword: string) => void;
@@ -36,14 +36,10 @@ export default function NewPasswordForm(props: NewPasswordFormProps) {
     setSavePassword,
     errorRepPassword,
     resetPassword
-  } = useResetPassword(props.changePassword);
+  } = usePasswordSignUp(props.changePassword);
 
   return (
     <Stack component='form' className={classes.ResetPasswordForm}>
-      <Box display={'flex'} className={classes.MainContainer}>
-        <Typography className={classes.Title}>{t('Reset password')}</Typography>
-      </Box>
-      <br />
       <Grid container direction={'column'}>
         <Box>
           <PasswordRuleChecker password={password} />

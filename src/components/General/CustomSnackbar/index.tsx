@@ -1,9 +1,9 @@
 'use client';
 
-import { useAppDispatch, useAppSelector } from '@/context';
-import { Alert, Snackbar } from '@mui/material';
-import { hideSnackbar } from '@/context/slices/snackbarSlice';
 import { Icon } from '@/components/General';
+import { useAppDispatch, useAppSelector } from '@/context';
+import { hideSnackbar } from '@/context/slices/snackbarSlice';
+import { Alert, Snackbar } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 const AlertIcon = ({ severity }: { severity?: string }) => {
@@ -63,8 +63,15 @@ export default function CustomSnackbar() {
               '& .MuiAlert-message': {
                 color: '#FFF'
               },
+              '& .MuiAlert-root': {
+                display: 'flex',
+                justifyContent: 'space-between'
+              },
               '& .MuiSvgIcon-root': {
                 fill: '#FFF'
+              },
+              '& .-MuiAlert-action': {
+                marginLeft: 'unset !important'
               }
             }}
             icon={<AlertIcon severity={snackbar.severity} />}

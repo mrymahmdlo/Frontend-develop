@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useAppDispatch } from '@/context';
 import { showSnackbar } from '@/context/slices/snackbarSlice';
 import apiHandler, { IntErrors } from '@/utils/apiHandler';
-import { TabsValue } from '../ForgetPasswordForm';
+import { TabsValue } from '../LogInCodeForm';
 
 type Stages = 'forget-password' | 'send-otp' | 'reset-password';
 
@@ -35,15 +35,11 @@ export default function useForgetPassword() {
       type: tab
     });
     setShowSpinner(true);
-    apiHandler('/user/forgetPassword', 'POST', {
-      mobile: user
-    })
+    apiHandler(`/user/login/VerificationCode/${user}`, 'POST', {})
       .then(() => {
         dispatch(
           showSnackbar({
-            message:
-              t('A new code has been sent to') +
-              (tab === 'email' ? ' email' : ' phone number'),
+            message: t('A new code has been sent to'),
             severity: 'success'
           })
         );
@@ -63,7 +59,8 @@ export default function useForgetPassword() {
           dispatch(
             showSnackbar({
               message: t('Error 500'),
-              severity: 'error'
+              severity: 'error',
+              open: true
             })
           );
         }

@@ -12,12 +12,8 @@ type OtpType = {
   errorMessage: string;
 };
 
-
-
-export default function useEmailConfirmation(
-  userEmail: string,
-  goToNextStep: (token?: string, mobile?:string) => void,
-  useForgetPasswordURI?: boolean
+export default function useLoginConfirmation(
+  userEmail: string
 ) {
   const dispatch = useAppDispatch();
   const t = useTranslations();
@@ -92,8 +88,7 @@ export default function useEmailConfirmation(
           //   goToNextStep(result.token);
           // } else {
           // Go to next step when everythings ok
-            goToNextStep(value,userEmail);
-          // }
+          setOtp(newValue); // }
         } catch (err) {
           const error = err as IntError;
           let firstError = error.errors;
@@ -120,19 +115,7 @@ export default function useEmailConfirmation(
     setShowSpinner(true);
 
     try {
-      await apiHandler(
-        useForgetPasswordURI
-          ? '/api/auth/forget-password/resend-otp/'
-          : '/user/signup',
-        'POST',
-        useForgetPasswordURI
-          ? {
-              identifier: userEmail
-            }
-          : {
-              mobile: userEmail
-            }
-      );
+      await apiHandler(`/user/login/VerificationCode/${userEmail}`, 'POST', {});
 
       // Show snackbar
       dispatch(

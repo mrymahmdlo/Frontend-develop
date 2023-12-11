@@ -1,10 +1,10 @@
-import Point from '@/assets/svgs/point.svg';
 import Apple from '@/assets/svgs/apple.svg';
 import {
   default as ArrowDown,
   default as BlueArrowDown
 } from '@/assets/svgs/arrow-down.svg';
 import ArrowLeft from '@/assets/svgs/arrow-left.svg';
+import FlashRight from '@/assets/svgs/flash-right.svg';
 import BitcoinCash from '@/assets/svgs/bitcoin-cash.svg';
 import Bitcoin from '@/assets/svgs/bitcoin.svg';
 import Bnb from '@/assets/svgs/bnb.svg';
@@ -39,6 +39,7 @@ import Meta from '@/assets/svgs/meta.svg';
 import Netflix from '@/assets/svgs/netflix.svg';
 import Notification from '@/assets/svgs/notification.svg';
 import Plus from '@/assets/svgs/plus.svg';
+import Point from '@/assets/svgs/point.svg';
 import Search from '@/assets/svgs/search.svg';
 import Shiba from '@/assets/svgs/shiba.svg';
 import SMS from '@/assets/svgs/sms.svg';
@@ -49,12 +50,12 @@ import Twitter from '@/assets/svgs/twitter.svg';
 import Unisex from '@/assets/svgs/unisex.svg';
 import WhiteApple from '@/assets/svgs/white-apple.svg';
 // import WhiteLogo from '@/assets/svgs/white-logo.svg';
-import Women from '@/assets/svgs/women.svg';
 import BlueTick from '@/assets/svgs/blue-tick.svg';
-import SelectArrow from '@/assets/svgs/select-arrow.svg';
 import Danger from '@/assets/svgs/danger.svg';
+import SelectArrow from '@/assets/svgs/select-arrow.svg';
 import TickCircle from '@/assets/svgs/tick-circle.svg';
 import User from '@/assets/svgs/user.svg';
+import Women from '@/assets/svgs/women.svg';
 
 export const icons = {
   apple: <Apple />,
@@ -65,6 +66,7 @@ export const icons = {
   closeCircle: <CloseCircle />,
   logo: <Logo />,
   arrowLeft: <ArrowLeft />,
+  flashRight: <FlashRight />,
   whiteLogo: <Logo />,
   grayFaceBook: <GrayFaceBook />,
   grayInstagram: <GrayInstagram />,

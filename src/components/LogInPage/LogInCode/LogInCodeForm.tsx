@@ -1,21 +1,19 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 // mui imports
-import { Box, Grid, Stack, Typography } from '@mui/material';
+import { Box, Grid, Stack } from '@mui/material';
 
 // style
-import classes from '@/assets/styleSheets/forget-password.module.scss';
+import classes from '@/assets/styleSheets/sign-up.module.scss';
 
 // local imports
 import {
   CustomTextField,
   DotSpinner,
-  Icon,
   SubmitButton,
   TabPanel
 } from '@/components/General';
@@ -33,7 +31,7 @@ interface ForgetPasswordFormProps {
 
 export type TabsValue = 'email' | 'phoneNumber';
 
-export default function ForgetPasswordForm(props: ForgetPasswordFormProps) {
+export default function LogInCodeForm(props: ForgetPasswordFormProps) {
   const t = useTranslations();
 
   const [tab] = useState<TabsValue>('phoneNumber');
@@ -64,17 +62,6 @@ export default function ForgetPasswordForm(props: ForgetPasswordFormProps) {
       className={classes.ForgetPasswordForm}
       onSubmit={handleSubmit(sendEmail)}
     >
-      <Box className={classes.LockIconContainer}>
-        <Icon name='lock' h={40} w={40} view='0 0 50 50' />
-      </Box>
-      <Box className={classes.MainContainer}>
-        <Typography className={classes.Title}>
-          {t('Trouble logging in?')}
-        </Typography>
-        <Typography className={classes.Subtitle}>
-          {t('Trouble logging phone')}
-        </Typography>
-      </Box>
       <Box sx={{ width: '100%' }}>
         <TabPanel
           value={tab}
@@ -104,13 +91,6 @@ export default function ForgetPasswordForm(props: ForgetPasswordFormProps) {
           />
         </TabPanel>
       </Box>
-      <Typography
-        component={Link}
-        href='/help-center'
-        className={classes.HelpCenterLink}
-      >
-        {t('Can’t reset your password?')}
-      </Typography>
       <Box className={classes.ButtonContainer}>
         <Grid container>
           {/* Submit btn */}

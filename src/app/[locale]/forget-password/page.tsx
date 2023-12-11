@@ -15,7 +15,7 @@ export default function ForgetPasswordPage() {
       hideNewsLetter
       BackComponent={
         <Link href='log-in'>
-          <Icon name='flashLeft' />
+          <Icon name='flashRight' w={18} h={18} view='0 0 24 24' />
           {t('Back to log in')}
         </Link>
       }

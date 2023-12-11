@@ -1,9 +1,9 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { CustomTextField, Icon } from '@/components/General';
-import { useState } from 'react';
 import { Box } from '@mui/material';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 
 interface IntProps {
   label?: string;
@@ -32,27 +32,29 @@ export default function PasswordField({
   };
 
   return (
-    <CustomTextField
-      id={id}
-      data-test-id='password-field'
-      errorMessage={errorMessage}
-      label={t(label)}
-      value={value}
-      autoComplete={`${autoComplete}`}
-      onChange={onChange ? (value) => onChange(value.target.value) : () => {}}
-      type={show ? 'text' : 'password'}
-      InputProps={{
-        endAdornment: (
-          <Box onClick={onClick} sx={{ cursor: 'pointer' }}>
-            <Icon
-              name={show ? 'eye' : 'eyeSlash'}
-              w={16}
-              h={16}
-              view='0 0 16 16'
-            />
-          </Box>
-        )
-      }}
-    />
+    <span style={{ direction: 'ltr' }}>
+      <CustomTextField
+        id={id}
+        data-test-id='password-field'
+        errorMessage={errorMessage}
+        label={t(label)}
+        value={value}
+        autoComplete={`${autoComplete}`}
+        onChange={onChange ? (value) => onChange(value.target.value) : () => {}}
+        type={show ? 'text' : 'password'}
+        InputProps={{
+          endAdornment: (
+            <Box onClick={onClick} sx={{ cursor: 'pointer' }}>
+              <Icon
+                name={show ? 'eye' : 'eyeSlash'}
+                w={16}
+                h={16}
+                view='0 0 16 16'
+              />
+            </Box>
+          )
+        }}
+      />
+    </span>
   );
 }

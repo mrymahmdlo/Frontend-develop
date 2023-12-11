@@ -25,7 +25,7 @@ export default function OtpInput({
   };
 
   return (
-    <div>
+    <div style={{ direction: 'ltr' }}>
       <MuiOtpInput
         value={value}
         length={length}

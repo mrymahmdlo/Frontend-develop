@@ -5,7 +5,8 @@ import {
   CustomTextField,
   DotSpinner,
   PasswordField,
-  SubmitButton
+  SubmitButton,
+  TabPanel
 } from '@/components/General';
 import { useAppDispatch } from '@/context';
 import { showSnackbar } from '@/context/slices/snackbarSlice';
@@ -17,17 +18,20 @@ import {
 } from '@/utils';
 import { ListOfTokens } from '@/utils/tokenHandler';
 import { logInValidations as validations } from '@/utils/validations/logInValidations';
-import { Stack, Typography } from '@mui/material';
+import { Box, Stack, Tab, Tabs, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import LogInCode from './LogInCode';
 
 type InputType = {
   mobile: string;
   password: string;
 };
+
+export type TabsValue = 'code' | 'password';
 
 export default function LogInInputs() {
   const dispatch = useAppDispatch();
@@ -36,6 +40,11 @@ export default function LogInInputs() {
 
   const [showSpinner, setShowSpinner] = useState(false);
 
+  const [tab, setTab] = useState<TabsValue>('password');
+
+  const handleChange = (event: SyntheticEvent, newValue: TabsValue) => {
+    setTab(newValue);
+  };
   // Use react hook form to handle form
   const {
     control,
@@ -48,7 +57,7 @@ export default function LogInInputs() {
   // Handle on success captcha
   const onSubmit = async () => {
     setShowSpinner(true);
-    apiHandler('/user/login', 'POST', {
+    apiHandler('/user/login?loginTypeEnum=PASSWORD', 'POST', {
       mobile: getValues('mobile'),
       password: getValues('password')
     })
@@ -83,7 +92,7 @@ export default function LogInInputs() {
 
         dispatch(
           showSnackbar({
-            message: 'Successful LogIn',
+            message: 'ورود با موفقیت انجام شد',
             severity: 'success'
           })
         );
@@ -124,79 +133,85 @@ export default function LogInInputs() {
         </Typography>
       </div>
       <br />
-      <Stack
-        component='form'
-        spacing='1.5rem'
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        {/* Mobile Or Email field */}
-        <Controller
-          control={control}
-          name='mobile'
-          rules={validations.mobileOrEmail}
-          render={({ field: { onChange, value } }) => (
-            <CustomTextField
-              inputWidth='26.25rem'
-              label={t('Phone number')}
-              value={value}
-              onChange={(e) => {
-                const newValue = e.target.value;
-                // Store new value
-                onChange(newValue);
-              }}
-              autoComplete='true'
-              errorMessage={errors.mobile?.message}
-            />
-          )}
-        />
-        {/* Password field */}
-        <Controller
-          control={control}
-          name='password'
-          rules={validations.password}
-          render={({ field: { onChange } }) => (
-            <PasswordField
-              errorMessage={errors.password?.message}
-              onChange={(v) => onChange(v)}
-            />
-          )}
-        />
 
-        <Link
-          style={{ marginTop: '0.5rem', fontSize: '14px' }}
-          href='forget-password'
+      <Box sx={{ width: '100%' }}>
+        <Tabs value={tab} onChange={handleChange} centered variant='fullWidth'>
+          <Tab
+            sx={{ fontSize: { xs: '14px', sm: '18px' }, textTransform: 'none' }}
+            label={t('Password')}
+            value={'password'}
+          />
+          <Tab
+            sx={{ fontSize: { xs: '14px', sm: '18px' }, textTransform: 'none' }}
+            label={t('Code')}
+            value={'code'}
+          />
+        </Tabs>
+        <TabPanel
+          index={'password'}
+          value={tab}
+          style={{ width: '100%', margin: '15px 0' }}
         >
-          {t('Forget Password?')}
-        </Link>
-        {/* Submit btn */}
-        <SubmitButton
-          disabled={showSpinner || !watch('mobile') || !watch('password')}
+          <Stack
+            component='form'
+            spacing='1.5rem'
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            {/* Mobile Or Email field */}
+            <Controller
+              control={control}
+              name='mobile'
+              rules={validations.mobileOrEmail}
+              render={({ field: { onChange, value } }) => (
+                <CustomTextField
+                  inputWidth='26.25rem'
+                  label={t('Phone number')}
+                  value={value}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    // Store new value
+                    onChange(newValue);
+                  }}
+                  autoComplete='true'
+                  errorMessage={errors.mobile?.message}
+                />
+              )}
+            />
+            {/* Password field */}
+              <Controller
+                control={control}
+                name='password'
+                rules={validations.password}
+                render={({ field: { onChange } }) => (
+                  <PasswordField
+                    errorMessage={errors.password?.message}
+                    onChange={(v) => onChange(v)}
+                  />
+                )}
+              />
+
+            <Link
+              style={{ marginTop: '0.5rem', fontSize: '14px' }}
+              href='forget-password'
+            >
+              {t('Forget Password?')}
+            </Link>
+            {/* Submit btn */}
+            <SubmitButton
+              disabled={showSpinner || !watch('mobile') || !watch('password')}
+            >
+              {showSpinner ? <DotSpinner /> : t('Log in')}
+            </SubmitButton>
+          </Stack>
+        </TabPanel>
+        <TabPanel
+          index={'code'}
+          value={tab}
+          style={{ width: '100%', margin: '15px 0' }}
         >
-          {showSpinner ? <DotSpinner /> : t('Log in')}
-        </SubmitButton>
-      </Stack>
-
-      {/* <Stack
-        flexDirection='row'
-        justifyContent='center'
-        alignItems='center'
-        gap='0.75rem'
-      >
-        <Icon
-          name='gradiantDivider'
-          w={92}
-          h={2}
-          view='0 0 92 2'
-          style={{ transform: 'rotate(180deg)' }}
-        />
-
-        <Typography className='separatory-text'>{t('OR')}</Typography>
-
-        <Icon name='gradiantDivider' w={92} h={2} view='0 0 92 2' />
-      </Stack>
-      <br /> */}
-      {/* Authentication provider buttons */}
-      {/* <AuthProviderBtns type='log-in' /> */}
+          <LogInCode />
+        </TabPanel>
+      </Box>
     </Stack>
   );
 }

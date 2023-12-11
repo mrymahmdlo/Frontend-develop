@@ -6,9 +6,9 @@ import { useState } from 'react';
 import { useAppDispatch } from '@/context';
 import { showSnackbar } from '@/context/slices/snackbarSlice';
 import apiHandler, { IntErrors } from '@/utils/apiHandler';
-import { TabsValue } from '../ForgetPasswordForm';
+import { TabsValue } from '../SignUpForm';
 
-type Stages = 'forget-password' | 'send-otp' | 'reset-password';
+type Stages = 'get-email' | 'otp' | 'get-user-info';
 
 type IdentifierType = {
   id: string;
@@ -16,17 +16,18 @@ type IdentifierType = {
   token?: string;
 };
 
-export default function useForgetPassword() {
+export default function useSignUp() {
   const t = useTranslations();
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const [stage, setStage] = useState<Stages>('forget-password');
+  const [stage, setStage] = useState<Stages>('get-email');
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
   const [identifier, setIdentifier] = useState<IdentifierType>({
     id: '',
     type: ''
   });
+  const [id, setId] = useState('');
 
   function enterOtp(user: string, tab: TabsValue) {
     if (showSpinner) return;
@@ -35,10 +36,10 @@ export default function useForgetPassword() {
       type: tab
     });
     setShowSpinner(true);
-    apiHandler('/user/forgetPassword', 'POST', {
+    apiHandler('/user/signup', 'POST', {
       mobile: user
     })
-      .then(() => {
+      .then((res) => {
         dispatch(
           showSnackbar({
             message:
@@ -47,7 +48,8 @@ export default function useForgetPassword() {
             severity: 'success'
           })
         );
-        setStage('send-otp');
+        setStage('otp');
+        setId(res.id)
       })
       .catch((err) => {
         console.log(err);
@@ -73,25 +75,27 @@ export default function useForgetPassword() {
 
   function confirmOtp(token: string) {
     setIdentifier({ ...identifier, token });
-    setStage('reset-password');
+    setStage('get-user-info');
   }
 
-  function changePassword(password: string) {
+  function changePassword(password: string, repPassword: string) {
     if (showSpinner) return;
 
     if (!identifier.token) return;
 
     setShowSpinner(true);
 
-    apiHandler('/user/updatePassword', 'POST', {
+    apiHandler('/user/signup/confirm', 'PUT', {
       verificationCode: identifier.token,
       // eslint-disable-next-line camelcase
-      newPassword: password,
+      password: password,
+
+      repeatPassword: repPassword,
       // eslint-disable-next-line camelcase
-      mobile: identifier.id
+      id: id
     })
       .then(() => {
-        router.push('/log-in');
+        router.push('/on-boarding');
       })
       .catch((err) => {
         console.log(err);

@@ -35,7 +35,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body>
+      <body style={{ direction: 'rtl' }}>
         <ThemeRegistry>
           <NextIntlClientProvider locale={locale} messages={messages}>
             {children}

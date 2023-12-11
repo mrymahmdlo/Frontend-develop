@@ -40,7 +40,7 @@ export default function NewPasswordForm(props: NewPasswordFormProps) {
 
   return (
     <Stack component='form' className={classes.ResetPasswordForm}>
-      <Box display={'flex'} className={classes.MainContainer}>
+      <Box className={classes.MainContainer}>
         <Typography className={classes.Title}>{t('Reset password')}</Typography>
       </Box>
       <br />
@@ -66,7 +66,7 @@ export default function NewPasswordForm(props: NewPasswordFormProps) {
           />
         </Box>
         {/* Save password */}
-        <Box display={'flex'} mb='1.25rem'>
+        <Box mb='1.25rem'>
           <CustomFormControlLabel
             control={
               <CustomCheckbox

@@ -6,7 +6,6 @@ export const patterns = {
   strongPassword: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/
 };
 
-
 // todo
 // messages must be multilingual
 export const validationMessageHandler = {
@@ -38,7 +37,7 @@ export const validationMessageHandler = {
   }),
 
   mobile: (value: string) =>
-    patterns.mobile.test(value) || `Mobile number does not valid`,
+    patterns.mobile.test(value) || `شماره تماس معتبر نیست `,
 
   required: (fieldName: string) => `${fieldName} is required`,
 

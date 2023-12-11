@@ -6,7 +6,7 @@ interface IntProps extends FormControlLabelProps {
 
 export default function CustomCheckbox({ label, ...props }: IntProps) {
   return (
-    <div data-test-id='form-control-label'>
+    <div style={{ direction: 'ltr' }}>
       <FormControlLabel
         {...props}
         label={label}

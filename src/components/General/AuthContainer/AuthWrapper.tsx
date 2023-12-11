@@ -1,6 +1,6 @@
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
 // mui imports
@@ -43,9 +43,7 @@ export default function AuthWrapper(props: AuthContainerProps) {
                   <Icon name='arrowLeft' w={18} h={18} view='0 0 24 24' />
                 </IconButton>
               )}
-              {props.title ?? (
-                <Icon name='logo' w={110} h={200} />
-              )}
+              {props.title ?? <Icon name='logo' w={110} h={200} />}
               <Box
                 width={
                   props.showBackIcon || props.BackComponent ? '26px' : '0px'
@@ -78,7 +76,12 @@ export default function AuthWrapper(props: AuthContainerProps) {
                   <Hidden mdDown>
                     <Box className={classes.AuthFormLink}>
                       <Link href={'/sign-up'}>
-                        <Icon name='flashLeft' />
+                        <Icon
+                          name='flashRight'
+                          w={18}
+                          h={18}
+                          view='0 0 24 24'
+                        />
                         {t('Back to Sign up')}
                       </Link>
                     </Box>
