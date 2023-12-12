@@ -1,6 +1,5 @@
 'use client';
 
-// import useGetCurrentLocation from '@/hooks/useGetCurrentLocation';
 import { Snackbar, SnackbarOrigin } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
@@ -11,7 +10,6 @@ interface State extends SnackbarOrigin {
 
 export default function NetworkChecker() {
   // Get user current location :/
-  // useGetCurrentLocation();
 
   const t = useTranslations();
   // Snackbar state

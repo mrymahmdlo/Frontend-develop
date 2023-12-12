@@ -9,14 +9,8 @@ import { Box, Button, Grid, Stack, Typography, alpha } from '@mui/material';
 import { CountDownClock, DotSpinner, OtpInput } from '@/components/General';
 
 import { useAppDispatch } from '@/context';
-import { showSnackbar } from '@/context/slices/snackbarSlice';
-import {
-  ListOfTokens,
-  apiHandler,
-  getAppToken,
-  setAppToken,
-  setCurrentAccountCookie
-} from '@/utils';
+import { hideSnackbar, showSnackbar } from '@/context/slices/snackbarSlice';
+import { apiHandler, setAppToken, setCurrentAccountCookie } from '@/utils';
 
 import { useRouter } from 'next/navigation';
 
@@ -43,40 +37,16 @@ export default function VerificationCodeForm({
     useLoginConfirmation(identifier);
 
   const onSubmit = async () => {
-    console.log('object');
     setShowSpinner(true);
     apiHandler('/user/login?loginTypeEnum=CODE', 'POST', {
       mobile: identifier,
       password: otp.value
     })
       .then((res) => {
-        // Get latest tokens if exists
-        const tokens = getAppToken();
-        let newToken: ListOfTokens;
-
-        if (tokens) {
-          newToken = JSON.parse(tokens);
-          newToken?.push({
-            [res.profile.email]: {
-              access: res.accessToken,
-              refresh: res.refreshToken
-            }
-          });
-        } else {
-          newToken = [
-            {
-              [res.profile.email]: {
-                access: res.accessToken,
-                refresh: res.refreshToken
-              }
-            }
-          ];
-        }
-
         // Set new token
-        setAppToken(newToken);
+        setAppToken({ access: res.accessToken, refresh: res.refreshToken });
         // Set current account email
-        setCurrentAccountCookie(res.profile.email);
+        setCurrentAccountCookie(res.profile);
 
         dispatch(
           showSnackbar({
@@ -84,7 +54,6 @@ export default function VerificationCodeForm({
             severity: 'success'
           })
         );
-        router.push('/');
       })
       .catch((err) => {
         if (err.errors?.length > 0) {
@@ -103,7 +72,11 @@ export default function VerificationCodeForm({
           );
         }
       })
-      .finally(() => setShowSpinner(false));
+      .finally(() => {
+        setShowSpinner(false);
+        router.push('/');
+        dispatch(hideSnackbar());
+      });
   };
 
   return (

@@ -46,7 +46,6 @@ export default function NewPasswordForm(props: NewPasswordFormProps) {
         </Box>
         <Box my='0.25rem'>
           <PasswordField
-            id='new-password'
             label={t('New password')}
             value={password}
             onChange={setPassword}
@@ -54,7 +53,6 @@ export default function NewPasswordForm(props: NewPasswordFormProps) {
         </Box>
         <Box my='0.25rem'>
           <PasswordField
-            id='repeat-password'
             label={t('Confirm new password')}
             value={repPassword}
             onChange={setRepPassword}
@@ -81,7 +79,6 @@ export default function NewPasswordForm(props: NewPasswordFormProps) {
           variant='contained'
           fullWidth
           color='primary'
-          id='send-new-password'
           disabled={
             password !== repPassword ||
             !patterns.strongPassword.test(password) ||

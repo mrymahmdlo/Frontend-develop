@@ -46,7 +46,6 @@ export default function useForgetPassword() {
         setStage('send-otp');
       })
       .catch((err) => {
-        console.log(err);
         const errors = err as IntErrors;
         if (Array.isArray(errors.errors) && err.errors?.length > 0) {
           dispatch(
@@ -91,7 +90,6 @@ export default function useForgetPassword() {
         router.push('/log-in');
       })
       .catch((err) => {
-        console.log(err);
 
         const errors = err as IntErrors;
         if (Array.isArray(errors.errors) && err.errors?.length > 0) {

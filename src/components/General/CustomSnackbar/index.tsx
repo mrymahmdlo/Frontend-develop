@@ -40,6 +40,8 @@ export default function CustomSnackbar() {
   const onCloseSnackbar = () => {
     dispatch(hideSnackbar());
   };
+
+
   return (
     <>
       {snackbar.type === 'alert' ? (
@@ -49,7 +51,7 @@ export default function CustomSnackbar() {
             horizontal: 'center'
           }}
           open={snackbar.open}
-          autoHideDuration={6000}
+          autoHideDuration={60000}
           onClose={onCloseSnackbar}
         >
           <Alert
@@ -64,8 +66,8 @@ export default function CustomSnackbar() {
                 color: '#FFF'
               },
               '& .MuiAlert-root': {
-                display: 'flex',
-                justifyContent: 'space-between'
+                display: 'flex !important',
+                justifyContent: 'space-between !important'
               },
               '& .MuiSvgIcon-root': {
                 fill: '#FFF'

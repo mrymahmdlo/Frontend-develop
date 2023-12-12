@@ -5,4 +5,3 @@ export { setAppToken } from './tokenHandler';
 export { setCurrentAccountCookie } from './tokenHandler';
 export { getCurrentAccountCookie } from './tokenHandler';
 export type { TokenType as TokenType } from './tokenHandler';
-export type { ListOfTokens as ListOfTokens } from './tokenHandler';

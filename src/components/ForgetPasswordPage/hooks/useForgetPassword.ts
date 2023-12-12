@@ -42,15 +42,13 @@ export default function useForgetPassword() {
         dispatch(
           showSnackbar({
             message:
-              t('A new code has been sent to') +
-              (tab === 'email' ? ' email' : ' phone number'),
+              t('A new code has been sent to') ,
             severity: 'success'
           })
         );
         setStage('send-otp');
       })
       .catch((err) => {
-        console.log(err);
         const errors = err as IntErrors;
         if (Array.isArray(errors.errors) && err.errors?.length > 0) {
           dispatch(
@@ -83,7 +81,7 @@ export default function useForgetPassword() {
 
     setShowSpinner(true);
 
-    apiHandler('/user/updatePassword', 'POST', {
+    apiHandler('/user/resetPassword', 'PUT', {
       verificationCode: identifier.token,
       // eslint-disable-next-line camelcase
       newPassword: password,
@@ -94,8 +92,6 @@ export default function useForgetPassword() {
         router.push('/log-in');
       })
       .catch((err) => {
-        console.log(err);
-
         const errors = err as IntErrors;
         if (Array.isArray(errors.errors) && err.errors?.length > 0) {
           dispatch(

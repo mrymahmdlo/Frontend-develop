@@ -43,8 +43,7 @@ export default function useSignUp() {
         dispatch(
           showSnackbar({
             message:
-              t('A new code has been sent to') +
-              (tab === 'email' ? ' email' : ' phone number'),
+              t('A new code has been sent to') ,
             severity: 'success'
           })
         );
@@ -52,7 +51,6 @@ export default function useSignUp() {
         setId(res.id)
       })
       .catch((err) => {
-        console.log(err);
         const errors = err as IntErrors;
         if (Array.isArray(errors.errors) && err.errors?.length > 0) {
           dispatch(
@@ -98,8 +96,6 @@ export default function useSignUp() {
         router.push('/on-boarding');
       })
       .catch((err) => {
-        console.log(err);
-
         const errors = err as IntErrors;
         if (Array.isArray(errors.errors) && err.errors?.length > 0) {
           dispatch(
