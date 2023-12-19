@@ -19,5 +19,19 @@ export const getUserInformationsValidations = {
   },
   location: {
     required: message.required('Location')
+  },
+  mobile: {
+    validate: {
+      matchPattern: (v: string) => {
+        return message.mobile(v);
+      }
+    }
+  },
+  email: {
+    required: message.required('Email'),
+    maxLength: message.maxLength('Email', 100),
+    validate: {
+      matchPattern: (v: string) => message.email(v)
+    }
   }
 };

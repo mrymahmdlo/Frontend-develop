@@ -43,23 +43,21 @@ export default function LogInPassword() {
       password: getValues('password')
     })
       .then((res) => {
-        // Set new token
         setAppToken({ access: res.accessToken, refresh: res.refreshToken });
-        // Set current account email
         setCurrentAccountCookie(res.profile);
-
         dispatch(
           showSnackbar({
             message: 'ورود با موفقیت انجام شد',
             severity: 'success'
           })
         );
+        router.push('/');
       })
       .catch((err) => {
-        if (err.errors?.length > 0) {
+        if (err.message) {
           dispatch(
             showSnackbar({
-              message: err.errors[0].detail,
+              message: t(err.message),
               severity: 'error'
             })
           );
@@ -74,7 +72,6 @@ export default function LogInPassword() {
       })
       .finally(() => {
         setShowSpinner(false);
-        router.push('/');
         dispatch(hideSnackbar());
       });
   };

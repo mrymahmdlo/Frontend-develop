@@ -5,7 +5,7 @@ import { useState } from 'react';
 // local imports
 import { useAppDispatch } from '@/context';
 import { showSnackbar } from '@/context/slices/snackbarSlice';
-import apiHandler, { IntErrors } from '@/utils/apiHandler';
+import apiHandler from '@/utils/apiHandler';
 import { TabsValue } from '../SignUpForm';
 
 type Stages = 'get-email' | 'otp' | 'get-user-info';
@@ -42,20 +42,19 @@ export default function useSignUp() {
       .then((res) => {
         dispatch(
           showSnackbar({
-            message:
-              t('A new code has been sent to') ,
+            message: t('A new code has been sent to'),
             severity: 'success'
           })
         );
         setStage('otp');
-        setId(res.id)
+        setId(res.id);
       })
       .catch((err) => {
-        const errors = err as IntErrors;
-        if (Array.isArray(errors.errors) && err.errors?.length > 0) {
+        console.log(err);
+        if (err.message) {
           dispatch(
             showSnackbar({
-              message: err.errors[0].detail,
+              message: t(err.message),
               severity: 'error'
             })
           );
@@ -93,14 +92,13 @@ export default function useSignUp() {
       id: id
     })
       .then(() => {
-        router.push('/on-boarding');
+        router.push('/profile');
       })
       .catch((err) => {
-        const errors = err as IntErrors;
-        if (Array.isArray(errors.errors) && err.errors?.length > 0) {
+        if (err.message) {
           dispatch(
             showSnackbar({
-              message: err.errors[0].detail,
+              message: t(err.message),
               severity: 'error'
             })
           );

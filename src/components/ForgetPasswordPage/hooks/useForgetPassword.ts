@@ -5,7 +5,7 @@ import { useState } from 'react';
 // local imports
 import { useAppDispatch } from '@/context';
 import { showSnackbar } from '@/context/slices/snackbarSlice';
-import apiHandler, { IntErrors } from '@/utils/apiHandler';
+import apiHandler from '@/utils/apiHandler';
 import { TabsValue } from '../ForgetPasswordForm';
 
 type Stages = 'forget-password' | 'send-otp' | 'reset-password';
@@ -41,19 +41,17 @@ export default function useForgetPassword() {
       .then(() => {
         dispatch(
           showSnackbar({
-            message:
-              t('A new code has been sent to') ,
+            message: t('A new code has been sent to'),
             severity: 'success'
           })
         );
         setStage('send-otp');
       })
       .catch((err) => {
-        const errors = err as IntErrors;
-        if (Array.isArray(errors.errors) && err.errors?.length > 0) {
+        if (err.message) {
           dispatch(
             showSnackbar({
-              message: err.errors[0].detail,
+              message: t(err.message),
               severity: 'error'
             })
           );
@@ -92,11 +90,10 @@ export default function useForgetPassword() {
         router.push('/log-in');
       })
       .catch((err) => {
-        const errors = err as IntErrors;
-        if (Array.isArray(errors.errors) && err.errors?.length > 0) {
+        if (err.message) {
           dispatch(
             showSnackbar({
-              message: err.errors[0].detail,
+              message: t(err.message),
               severity: 'error'
             })
           );

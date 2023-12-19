@@ -8,6 +8,7 @@
   "An error occured": "خطا! لطفا مجدد سعی کنید",
   "At least character": "شامل حداقل یک حرف کوچک و یک حرف بزرگ و عدد",
   "Add Account": "Add Account",
+  "Address": "آدرس",
 
   "B": "",
   "Back to log in": "بازگشت به ورود",
@@ -25,7 +26,7 @@
   "Code": "کد",
 
   "D": "",
-  "Date of birth": "Date of Birth",
+  "Date of birth": "تاریخ تولد",
 
   "E": "",
   "Email": "ایمیل",
@@ -40,6 +41,7 @@
   "Favorite market": "Favorite market",
   "Female": "Female",
   "Forget Password?":"فراموشی رمز ؟",
+  "Family":"نام خانوادگی",
 
   "G": "",
   "Gender": "Gender",
@@ -53,7 +55,7 @@
   "Log in with apple": "Log in with Apple",
   "Log in with google": "Log in with Google",
   "Login to DGB": "ورود به دیجی‌برق",
-  "login code sent": "login code sent",
+  "login code sent": "کد ورود ارسال شد",
 
   "In Progress": "In Progress",
 
@@ -67,6 +69,8 @@
   "Not now": "Not now",
   "New password": "رمز جدید",
   "New password is not macthed": "عدم تطابق رمز جدید",
+  "Name":"نام",
+  "NationalKey":"کد ملی",
 
   "O": "",
   "Or": "یا",
@@ -76,7 +80,7 @@
   "Otp expired": "Confirmation code has been expired, please click on Resend Code button",
 
   "P": "",
-  "Phone": "Phone",
+  "Phone": "شماره",
   "Phone number": "شماره تماس",
   "Password": "رمز",
   "Password characters": "تعداد 8-32 کاراکتر",
@@ -108,12 +112,18 @@
 
   "U": "",
   "User agreement": "User Agreement",
+    "user.mobile.exist":"شماره در سیستم وجود دارد",
+
 
   "W": "",
-  "We sent a login code to": "We sent a login code to",
+  "We sent a login code to": "کد ورود ارسال شده است",
   "We’ll remember the login info for these accounts": "We’ll remember the login info for these accounts. You won’t need to enter it when you log in again.",
 
   "Y": "",
   "You are offline": "اینترنت متصل نیست",
   "Your favorite registed": "Your favorites have been successfully registered"
+
+
+
+
 }

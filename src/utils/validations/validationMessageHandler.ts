@@ -10,21 +10,21 @@ export const patterns = {
 // messages must be multilingual
 export const validationMessageHandler = {
   confirmPassword: (value: string, passwordValue: string) =>
-    value === passwordValue || `Password and Confirm password does not match`,
+    value === passwordValue || `کلمه عبور و تکرار منطبق نیست`,
 
   digits: (fieldName: string, value: string, digits: number) =>
     value.length === digits || `${fieldName} must be ${digits} digits.`,
 
   email: (value: string) =>
-    patterns.email.test(value) || 'Email address must be a valid address',
+    patterns.email.test(value) || 'آدرس ایمیل باید معتبر باشد',
 
   usernameOrEmail: (value: string) =>
     patterns.username.test(value) ||
     patterns.email.test(value) ||
-    'Username/Email must be a valid string',
+    'نام کاربری باید معتبر باشد',
 
   noSpaceChar: (fieldName: string, value: string) =>
-    value.indexOf(' ') === -1 || `${fieldName} must not contain any spaces`,
+    value.indexOf(' ') === -1 || `${fieldName} نباید دارای فاصله باشد`,
 
   maxLength: (fieldName: string, value: number = 50) => ({
     value: value,
@@ -39,9 +39,9 @@ export const validationMessageHandler = {
   mobile: (value: string) =>
     patterns.mobile.test(value) || `شماره تماس معتبر نیست `,
 
-  required: (fieldName: string) => `${fieldName} is required`,
+  required: (fieldName: string) => `${fieldName} باید پر شود`,
 
   strongPassword: (value: string) =>
     patterns.strongPassword.test(value) ||
-    'Password must has at least one uppercase, lowercase, and number'
+    'کلمه عبور باید شامل حداقل یک حرف بزرگ، یک حرف کوچک و یک عدد باشد'
 };
