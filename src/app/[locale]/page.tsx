@@ -19,10 +19,7 @@ export default function Home() {
           <Link href='/forget-password'>Forget Password</Link>
         </Grid>
         <Grid item>
-          <Link href='/help-center'>Help Center</Link>
-        </Grid>
-        <Grid item>
-          <Link href='/demo'>Add account</Link>
+          <Link href='/profile'>Profile</Link>
         </Grid>
       </Grid>
     </main>

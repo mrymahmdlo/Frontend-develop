@@ -1,3 +1,4 @@
+import { Icon } from '@/components/General';
 import { useAppDispatch } from '@/context';
 import { hideSnackbar, showSnackbar } from '@/context/slices/snackbarSlice';
 import {
@@ -6,19 +7,21 @@ import {
   setAppToken,
   setCurrentAccountCookie
 } from '@/utils';
+import convertDateFormat from '@/utils/dateFormat';
 import { getUserInformationsValidations as validations } from '@/utils/validations/getUserInformationsValidations';
-import { Grid, Stack } from '@mui/material';
+import { Grid, Stack, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import DatePicker from 'react-multi-date-picker';
+import Toolbar from 'react-multi-date-picker/plugins/toolbar';
 import { CustomTextField, DotSpinner, SubmitButton } from '../General';
 import AvatarComponent from '../General/AvatarInput';
 
-interface FormData {
+interface ProfileData {
   name: string;
   family: string;
   birthdate: string;
@@ -27,6 +30,15 @@ interface FormData {
   address: string;
   introducerMobile: string;
   file: File | null;
+}
+
+interface InfoData {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  pictureId: string;
+  roles: string[];
 }
 
 export default function Profile() {
@@ -38,30 +50,49 @@ export default function Profile() {
     control,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormData>();
+  } = useForm<ProfileData>();
 
   const [showSpinner, setShowSpinner] = useState(false);
+  const [id, setId] = useState('');
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<ProfileData> = (data) => {
+    const isoFormattedDate = convertDateFormat(
+      data.birthdate,
+      'yyyy/MM/dd',
+      "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"
+    );
+
     const formData = new FormData();
-    formData.append('address', data.address);
-    formData.append('birthdate', data.birthdate);
-    formData.append('email', data.email);
-    formData.append('name', data.name);
-    formData.append('family', data.family);
-    formData.append('introducerMobile', data.introducerMobile);
-    formData.append('nationalKey', data.nationalKey);
-    data.file ? formData.append('file', data.file) : null;
+    formData.append('id', id);
+    if (data.address) {
+      formData.append('address', data.address);
+    }
+    if (isoFormattedDate) {
+      formData.append('birthdate', isoFormattedDate);
+    }
+    if (data.email) {
+      formData.append('email', data.email);
+    }
+    if (data.name) {
+      formData.append('name', data.name);
+    }
+    if (data.family) {
+      formData.append('family', data.family);
+    }
+    if (data.introducerMobile) {
+      formData.append('introducerMobile', data.introducerMobile);
+    }
+    if (data.nationalKey) {
+      formData.append('nationalKey', data.nationalKey);
+    }
+    if (data.file) {
+      formData.append('file', data.file);
+    }
 
-    console.log('data', data);
-    const info = getCurrentAccountCookie();
-    console.log('info', info);
     setShowSpinner(true);
-    apiHandler('/user', 'PUT', formData)
+    apiHandler('/user', 'PUT', formData, true)
       .then((res) => {
-        // Set new token
         setAppToken({ access: res.accessToken, refresh: res.refreshToken });
-        // Set current account email
         setCurrentAccountCookie(res.profile);
 
         dispatch(
@@ -70,6 +101,8 @@ export default function Profile() {
             severity: 'success'
           })
         );
+
+        router.push('/');
       })
       .catch((err) => {
         if (err.message) {
@@ -90,10 +123,19 @@ export default function Profile() {
       })
       .finally(() => {
         setShowSpinner(false);
-        router.push('/');
         dispatch(hideSnackbar());
       });
   };
+
+  useEffect(() => {
+    const info = getCurrentAccountCookie();
+    let newToken: InfoData;
+
+    if (info) {
+      newToken = JSON.parse(info);
+      setId(newToken.id);
+    }
+  }, []);
 
   return (
     <>
@@ -134,7 +176,7 @@ export default function Profile() {
               name='name'
               render={({ field: { onChange, value } }) => (
                 <CustomTextField
-                  inputWidth='26.25rem'
+                  inputWidth='26.25rem !important'
                   label={t('Name')}
                   value={value}
                   onChange={(e) => {
@@ -153,7 +195,7 @@ export default function Profile() {
               rules={validations.mobile}
               render={({ field: { onChange, value } }) => (
                 <CustomTextField
-                  inputWidth='26.25rem'
+                  inputWidth='26.25rem !important'
                   label={t('Phone number')}
                   value={value}
                   onChange={(e) => {
@@ -172,7 +214,7 @@ export default function Profile() {
               name='address'
               render={({ field: { onChange, value } }) => (
                 <CustomTextField
-                  inputWidth='26.25rem'
+                  inputWidth='26.25rem !important'
                   label={t('Address')}
                   value={value}
                   onChange={(e) => {
@@ -200,7 +242,7 @@ export default function Profile() {
               name='family'
               render={({ field: { onChange, value } }) => (
                 <CustomTextField
-                  inputWidth='26.25rem'
+                  inputWidth='26.25rem !important'
                   label={t('Family')}
                   value={value}
                   onChange={(e) => {
@@ -219,7 +261,7 @@ export default function Profile() {
               rules={validations.email}
               render={({ field: { onChange, value } }) => (
                 <CustomTextField
-                  inputWidth='26.25rem'
+                  inputWidth='26.25rem !important'
                   label={t('Email')}
                   value={value}
                   onChange={(e) => {
@@ -237,7 +279,7 @@ export default function Profile() {
               name='nationalKey'
               render={({ field: { onChange, value } }) => (
                 <CustomTextField
-                  inputWidth='26.25rem'
+                  inputWidth='26.25rem !important'
                   label={t('NationalKey')}
                   value={value}
                   onChange={(e) => {
@@ -273,13 +315,29 @@ export default function Profile() {
                     calendarPosition='bottom-right'
                     placeholder='لطفا تاریخ را انتخاب کنید'
                     value={value || ''}
+                    // eslint-disable-next-line react/jsx-key
+                    plugins={[<Toolbar position='bottom' />]} // Wrap the Toolbar in an array
                     onChange={(date) => {
                       onChange(date?.toString());
                     }}
                   />
                   {errors && errors[name] && (
-                    //if you want to show an error message
-                    <span>your error message !</span>
+                    <Stack
+                      flexDirection='row'
+                      alignItems='center'
+                      gap='0.25rem'
+                      width='27.8rem'
+                    >
+                      <Stack>
+                        <Icon name='error' w={12} h={12} view='0 0 12 12' />
+                      </Stack>
+
+                      <div>
+                        <Typography variant='caption' className='error-message'>
+                          تاریخ را انتخاب کنید{' '}
+                        </Typography>
+                      </div>
+                    </Stack>
                   )}
                 </>
               )}
@@ -295,7 +353,7 @@ export default function Profile() {
             xs={6}
             mt={3}
           >
-            <SubmitButton width='83%' disabled={showSpinner}>
+            <SubmitButton width='27.8rem' disabled={showSpinner}>
               {showSpinner ? <DotSpinner /> : t('Confirm')}
             </SubmitButton>
           </Grid>

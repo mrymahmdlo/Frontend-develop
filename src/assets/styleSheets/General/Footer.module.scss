@@ -22,7 +22,6 @@
   padding: 28px 36px;
   max-width: 1200px;
   top: -54px;
-  direction: ltr;
 }
 
 .AlignDots {
@@ -47,10 +46,10 @@
   border-radius: 30px !important;
   width: 94px !important;
   height: 32px !important;
-  right: 0;
+  left: 0;
   font-weight: 700;
   margin: 12px !important;
-  margin-right: 2.7rem !important;
+  margin-left: 2.7rem !important;
 }
 
 .EmailButton:hover {

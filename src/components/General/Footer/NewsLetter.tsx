@@ -2,7 +2,6 @@ import style from '@/assets/styleSheets/General/Footer.module.scss';
 import Icon from '@/components/General/Icon';
 import { Button, Grid, TextField, Typography } from '@mui/material';
 
-
 function NewsLetter() {
   return (
     <footer className={style.FooterSearch} data-test='newsletter-section'>
@@ -20,10 +19,10 @@ function NewsLetter() {
             fontWeight={700}
             className={style.EmailText}
           >
-            Newsletter
+            عضویت در خبرنامه دیجی برق
           </Typography>
           <Typography width={'90%'} className={style.EmailSubText}>
-            Be the first one to know about discounts, offers and events
+            فقط کمپین ها و تخفیف های ویژه
           </Typography>
         </Grid>
         <Grid
@@ -42,9 +41,9 @@ function NewsLetter() {
               '& label': {
                 color: `${theme.palette.gray.main} !important`,
                 height: '60px',
-                display: 'flex',
-                justifyContent: 'center',
-                flexDirection: 'row-reverse'
+                right: 0,
+                marginRight: '2em',
+                direction: 'ltr'
               },
               '& .MuiFilledInput-root': {
                 border: `1px solid`,
@@ -78,11 +77,11 @@ function NewsLetter() {
                 display={'flex'}
                 justifyContent={'space-between'}
               >
-                <Icon name='sms' text='Enter your email' />
+                <Icon name='sms' text='ایمیل خود را وارد کنید' />
               </Grid>
             }
           />
-          <Button className={style.EmailButton}>Submit</Button>
+          <Button className={style.EmailButton}>ارسال</Button>
         </Grid>
       </Grid>
     </footer>

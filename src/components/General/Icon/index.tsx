@@ -19,7 +19,7 @@ export default function Icon({
   text
 }: IntProps) {
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex', direction: 'rtl', gap: '3px' }}>
       <SvgIcon
         sx={{ width: `${w}px`, height: `${h}px`, ...style }}
         viewBox={view}

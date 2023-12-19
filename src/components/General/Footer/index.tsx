@@ -40,12 +40,13 @@ function Footer({ isNews }: IntProps) {
                 fontWeight={500}
                 lineHeight={'21px'}
               >
-                DGB is a specialized platform for analyzing and analyzing
-                international financial markets and local markets in different
-                countries, making market predictions easier for traders
-                worldwide. DGB serves as a powerful social network for financial
-                market experts and analysts, as well as a gateway for beginners
-                to make more informed decisions.
+                تمامی کسب‌وکارهای فعال در دیجی برق مدنی افراد شناخته شده و دارای
+                هویت کسبی بوده و در زمینه‌های فروشنده ،پخش‌کننده ،تولیدکننده
+                ،بازرگان و خدمات دارای مهارت و تجربه میباشند.
+                <br />
+                اگر شماهم یک فرد صنفی دارای مجوز در این زمینه ها میباشید و علاقه
+                مند به توسعه کسب و کارتان هستید همین امروز در سایت دیجی برق مدنی
+                ثبت نام کنید.
               </Typography>
               <Divider
                 style={{ backgroundColor: '#33435A', marginTop: '32px' }}

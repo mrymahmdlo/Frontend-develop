@@ -1,6 +1,6 @@
+import { Icon } from '@/components/General';
 import { OutlinedInputProps, Stack, Typography } from '@mui/material';
 import TextField, { StandardTextFieldProps } from '@mui/material/TextField';
-import { Icon } from '@/components/General';
 
 interface IntProps extends StandardTextFieldProps {
   errorMessage?: string;
