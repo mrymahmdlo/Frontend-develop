@@ -36,13 +36,8 @@ next-env.d.ts
 yarn.lock
 .vscode
 
-# cypress
-cypress/screenshots
-cypress/videos
-
 
 # coverage
 .nyc_output
 coverage
-cypress-coverage
 jest-coverage

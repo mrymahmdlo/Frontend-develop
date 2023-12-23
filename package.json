@@ -1,16 +1,13 @@
 {
-  "name": "trade-app",
+  "name": "dg-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "node server.js",
     "cm": "cz",
-    "lint": "next lint",
-    "release": "release-it",
-    "test": "start-server-and-test dev 3000 cypress:open",
-    "cypress:open": "cypress open"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
@@ -19,7 +16,6 @@
     "@mui/material": "^5.14.10",
     "@reduxjs/toolkit": "^1.9.6",
     "@svgr/webpack": "^8.1.0",
-    "commitizen": "^4.3.0",
     "cookies-next": "^4.0.0",
     "date-fns": "^3.0.0",
     "mui-one-time-password-input": "^2.0.0",
@@ -29,7 +25,6 @@
     "react": "18.2.0",
     "react-countdown": "^2.3.5",
     "react-dom": "18.2.0",
-    "react-geetest-v4": "^1.1.1",
     "react-hook-form": "^7.47.0",
     "react-mobile-picker": "^1.0.0",
     "react-multi-date-picker": "^4.4.1",
@@ -39,101 +34,20 @@
     "swiper": "^10.3.1"
   },
   "devDependencies": {
-    "@cypress/browserify-preprocessor": "^3.0.2",
-    "@cypress/code-coverage": "^3.12.4",
-    "@release-it/conventional-changelog": "^7.0.2",
-    "@testing-library/cypress": "^10.0.1",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-datepicker": "^4.19.4",
     "@types/react-dom": "latest",
     "@types/redux-logger": "^3.0.10",
-    "@types/testing-library__cypress": "^5.0.12",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
     "babel-plugin-istanbul": "^6.1.1",
-    "cypress": "^13.3.3",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-cypress": "^2.15.1",
-    "nyc": "^15.1.0",
     "prettier": "^3.0.3",
-    "release-it": "^16.2.0",
     "sass": "^1.68.0",
-    "start-server-and-test": "^2.0.1",
     "typescript": "latest"
-  },
-  "nyc": {
-    "extends": "./.nycrc.json",
-    "report-dir": "cypress-coverage",
-    "reporter": [
-      "json",
-      "lcov",
-      "text-summary"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release v${version}"
-    },
-    "github": {
-      "release": true
-    },
-    "npm": {
-      "publish": false
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "infile": "CHANGELOG.md",
-        "preset": {
-          "name": "conventionalcommits",
-          "types": [
-            {
-              "type": "feat",
-              "section": "Features"
-            },
-            {
-              "type": "fix",
-              "section": "Bug Fixes"
-            },
-            {
-              "type": "docs",
-              "section": "Documents"
-            },
-            {
-              "type": "style",
-              "section": "Document styles"
-            },
-            {
-              "type": "refactor",
-              "section": "Refactor"
-            },
-            {
-              "type": "perf",
-              "section": "Improve performance"
-            },
-            {
-              "type": "test",
-              "section": "Test"
-            },
-            {
-              "type": "build",
-              "section": "Build"
-            },
-            {
-              "type": "ci",
-              "section": "CI configuration"
-            }
-          ]
-        }
-      }
-    }
   }
 }

@@ -17,7 +17,6 @@ export { default as DotSpinner } from './DotSpinner';
 export { default as Header } from './Header';
 export { default as TabPanel } from './TabPanel';
 export { default as SelectableButton } from './SelectableButton';
-export { default as GeetestCaptcha } from './GeetestCaptcha';
 export { default as PasswordRuleChecker } from './PasswordRuleChecker';
 export { default as SelectableTextField } from './SelectableTextField';
 export { default as NetworkChecker } from './NetworkChecker';
