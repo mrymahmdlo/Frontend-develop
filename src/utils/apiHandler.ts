@@ -32,7 +32,8 @@ export default async function apiHandler(
     const tokens = getAppToken();
     if (tokens) {
       const accessToken = JSON.parse(tokens);
-      if (accessToken) headers['Authorization'] = `Bearer ${accessToken.access}`;
+      if (accessToken)
+        headers['Authorization'] = `Bearer ${accessToken.access}`;
       else throw 'An error occurred when fetching the access token';
     } else {
       throw 'An error occurred when fetching the token';
@@ -65,10 +66,12 @@ export default async function apiHandler(
       const json = JSON.parse(text);
       return json;
     } catch (err) {
-      return true;
+      console.error('Error parsing response:', err);
+      throw err; // Rethrow the original error
     }
   }
 
   const error = await res.json();
+  console.error('API error response:', error);
   throw error;
 }

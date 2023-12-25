@@ -7,7 +7,7 @@ import {
   SubmitButton
 } from '@/components/General';
 import { useAppDispatch } from '@/context';
-import { hideSnackbar, showSnackbar } from '@/context/slices/snackbarSlice';
+import { showSnackbar } from '@/context/slices/snackbarSlice';
 import { apiHandler, setAppToken, setCurrentAccountCookie } from '@/utils';
 import { logInValidations as validations } from '@/utils/validations/logInValidations';
 import { Stack } from '@mui/material';
@@ -72,7 +72,6 @@ export default function LogInPassword() {
       })
       .finally(() => {
         setShowSpinner(false);
-        dispatch(hideSnackbar());
       });
   };
 
