@@ -59,6 +59,8 @@
   "login code sent": "کد ورود ارسال شد",
 
   "In Progress": "In Progress",
+  "Invalid password or username.": "نام کاربری و رمز عبور معتبر نیست",
+  "Introducer number":"شماره تماس معرف",
 
   "M": "",
   "Male": "Male",

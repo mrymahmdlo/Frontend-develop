@@ -82,7 +82,6 @@ export default function AletContainer() {
           display: 'flex',
           alignItems: 'center'
         }}
-        data-test-id='universal-alert-app'
       >
         {alertBackFunction ? (
           <IconButton aria-label='back' onClick={alertBackFunction}>

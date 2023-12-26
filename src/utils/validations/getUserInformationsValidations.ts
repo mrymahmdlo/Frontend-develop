@@ -28,8 +28,8 @@ export const getUserInformationsValidations = {
     }
   },
   email: {
-    required: message.required('Email'),
-    maxLength: message.maxLength('Email', 100),
+    required: message.required('ایمیل'),
+    maxLength: message.maxLength('ایمیل', 100),
     validate: {
       matchPattern: (v: string) => message.email(v)
     }

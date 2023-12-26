@@ -2,8 +2,8 @@ import { validationMessageHandler as message } from './validationMessageHandler'
 
 export const logInValidations = {
   mobileOrEmail: {
-    required: message.required('Email, phone number or username'),
-    maxLength: message.maxLength('Email, phone number or username', 100),
+    required: message.required('شماره تماس'),
+    maxLength: message.maxLength('شماره تماس', 100),
     validate: {
       matchPattern: (v: string) => {
         const isMobile = /^\d+$/.test(v);
@@ -16,7 +16,7 @@ export const logInValidations = {
     }
   },
   password: {
-    required: message.required('Password')
+    required: message.required('کلمه عبور')
   },
   mobile: {
     validate: {

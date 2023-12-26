@@ -3,7 +3,7 @@ import { Icon } from '@/components/General';
 
 export default function CustomCheckbox({ ...props }) {
   return (
-    <div data-test-id='checkbox'>
+    <div>
       <Checkbox
         {...props}
         icon={<Icon name='checkbox' />}

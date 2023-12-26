@@ -4,7 +4,7 @@ import { Button, Grid, TextField, Typography } from '@mui/material';
 
 function NewsLetter() {
   return (
-    <footer className={style.FooterSearch} data-test='newsletter-section'>
+    <footer className={style.FooterSearch}>
       <Grid display={'flex'} alignItems={'center'} container>
         <Grid
           xs={12}

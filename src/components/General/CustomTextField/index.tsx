@@ -15,7 +15,7 @@ export default function CustomTextField({
   ...props
 }: IntProps) {
   return (
-    <div data-test-id='custom-text-field'>
+    <div>
       <TextField
         InputProps={{ disableUnderline: true } as Partial<OutlinedInputProps>}
         variant='filled'

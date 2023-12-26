@@ -63,12 +63,10 @@ export default function UniversalModalContainer() {
           display: 'flex',
           justifyContent: 'space-between'
         }}
-        data-test-id='universal-modal-app'
       >
         {modalBackIconFunction ? (
           <IconButton
             aria-label='back'
-            data-test-id='universal-modal-back-icon'
             onClick={() => {}}
             sx={{ p: 0, width: '30px' }}
           >
@@ -80,7 +78,6 @@ export default function UniversalModalContainer() {
         {title ?? <Icon name='logo' w={110} h={26} view='0 0 110 29' />}
         {!modalBackIconFunction ? (
           <IconButton
-            data-test-id='close-modal'
             aria-label='close'
             onClick={handleClose}
             sx={{ width: '30px', p: 0 }}

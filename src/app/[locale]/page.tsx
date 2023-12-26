@@ -1,27 +1,34 @@
+'use client';
+
+import { AuthContainer } from '@/components/General';
 import { Grid } from '@mui/material';
-import Link from 'next/link';
+import Provider from '@/components/OnBoardingPage/Provider';
+import Slider from '@/components/OnBoardingPage/Slider';
 
 export default function Home() {
   return (
-    <main>
-      <h3>Hi DGB</h3>
-      <Grid container gap={2}>
-        <Grid item>
-          <Link href='/on-boarding'>On boarding</Link>
+    <AuthContainer fillContainer hideHeader hideMobileHeader>
+      <Grid
+        container
+        justifyContent={'space-between'}
+        alignContent={'center'}
+        sx={{ minHeight: '760px' }}
+      >
+        <Grid item xs={12} md={6}>
+          <Slider />
         </Grid>
-        <Grid item>
-          <Link href='/sign-up'>Sign up</Link>
-        </Grid>
-        <Grid item>
-          <Link href='/log-in'>Log in</Link>
-        </Grid>
-        <Grid item>
-          <Link href='/forget-password'>Forget Password</Link>
-        </Grid>
-        <Grid item>
-          <Link href='/profile'>Profile</Link>
+        <Grid
+          item
+          xs={12}
+          md={5}
+          mt={2}
+          container
+          justifyContent={'center'}
+          alignContent={'center'}
+        >
+          <Provider />
         </Grid>
       </Grid>
-    </main>
+    </AuthContainer>
   );
 }

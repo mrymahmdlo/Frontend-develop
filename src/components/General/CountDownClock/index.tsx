@@ -26,7 +26,7 @@ const CountDownClock = ({ second = 300, onComplete }: IntProps) => {
         <Icon name='clock' w={12} h={12} view='0 0 12 12' />
       </Stack>
 
-      <div data-test-id='counter'>
+      <div>
         <Countdown
           date={now + second * 1000}
           onComplete={onComplete}

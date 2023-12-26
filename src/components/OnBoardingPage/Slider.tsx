@@ -7,25 +7,25 @@ export default function Slider() {
       src: '/assets/images/slide0.png',
       height: 360,
       width: 512,
-      header: 'Leading',
-      subHeader: ' Cryptocurrency exchange',
-      text: '500+ cryptocurrency'
+      header: 'تبلیغات آسان',
+      subHeader: 'نزدیکترین عامل برق به شما',
+      text: 'فعالیت مختص خانواده برق'
     },
     {
       src: '/assets/images/slide1.png',
       height: 360,
       width: 512,
-      header: 'Licensed',
-      subHeader: ' operation Audited by top firm',
-      text: 'Obtained regulatory license from the EU, US, Canada and Australia.Released PoR certification from Mazars and passed the security audit by Certik.'
+      header: 'معرفی مشاغل',
+      subHeader: 'تجربه یک حقوق عالی',
+      text: 'تبلیغات و معرفی مکانهای کسبی درخانواده بزرگ برق و محصولاتشان'
     },
     {
       src: '/assets/images/slide2.png',
       height: 360,
       width: 512,
-      header: 'Largest',
-      subHeader: ' Crypto trading community',
-      text: 'Auto copy elite traders’ strategies in real time'
+      header: 'عاملین برق',
+      subHeader: '  الکترونیک ، الکتریک ، صنعت',
+      text: 'واردکننده یا صادرکننده تولیدکنندگان'
     }
   ];
 

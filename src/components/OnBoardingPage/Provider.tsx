@@ -26,14 +26,9 @@ export default function Provider() {
     >
       <Grid item xs={12}>
         <Button variant='contained' href='/sign-up' sx={SignUpStyles}>
-          Sign up
+          ثبت نام
         </Button>
       </Grid>
-{/* 
-      <Grid item xs={12}>
-        <AuthProviderBtns />
-      </Grid> */}
-
       <Grid item xs={12}>
         <Button
           sx={SignInStyles}
@@ -42,7 +37,7 @@ export default function Provider() {
           autoCapitalize='false'
           href='/log-in'
         >
-          Log In
+          ورود
         </Button>
       </Grid>
     </Grid>

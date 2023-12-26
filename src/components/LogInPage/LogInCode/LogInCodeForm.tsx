@@ -78,7 +78,6 @@ export default function LogInCodeForm(props: ForgetPasswordFormProps) {
                 inputWidth='26.25rem'
                 label={t('Phone number')}
                 value={value}
-                data-test-id='user_phone'
                 autoComplete='true'
                 onChange={(e) => {
                   const newValue = e.target.value;

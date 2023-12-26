@@ -51,7 +51,7 @@ export default function LogInPassword() {
             severity: 'success'
           })
         );
-        router.push('/');
+        router.push('/profile');
       })
       .catch((err) => {
         if (err.message) {

@@ -95,7 +95,7 @@ export default function Questions() {
             </Grid>
             <Grid item xs={1} md={2}></Grid>
           </Grid>
-          <Grid item data-test-id='question-container'>
+          <Grid item>
             {questions ? (
               questions.map((item, index) => (
                 <Accordion

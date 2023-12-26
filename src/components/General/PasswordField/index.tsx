@@ -35,7 +35,6 @@ export default function PasswordField({
     <span style={{ direction: 'ltr' }}>
       <CustomTextField
         id={id}
-        data-test-id='password-field'
         errorMessage={errorMessage}
         label={t(label)}
         value={value}

@@ -14,7 +14,6 @@ export default function SubmitButton({
   return (
     <Button
       disabled={disabled}
-      data-test-id='submit-btn'
       variant='contained'
       type='submit'
       sx={(theme) => ({

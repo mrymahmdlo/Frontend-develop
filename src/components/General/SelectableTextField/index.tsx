@@ -20,7 +20,6 @@ export default function SelectableTextField({
   return (
     <Box
       position='relative'
-      data-test-id='selectable-container'
       onClick={onClick}
     >
       <CustomTextField

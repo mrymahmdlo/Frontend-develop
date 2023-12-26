@@ -8,7 +8,7 @@ import Slider from '@/components/OnBoardingPage/Slider';
 
 export default function onBoarding() {
   return (
-    <AuthContainer fillContainer hideHeader hideNewsLetter hideMobileHeader>
+    <AuthContainer fillContainer hideHeader  hideMobileHeader>
       <Grid
         container
         justifyContent={'space-between'}
