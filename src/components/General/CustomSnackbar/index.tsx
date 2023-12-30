@@ -51,7 +51,7 @@ export default function CustomSnackbar() {
             horizontal: 'center'
           }}
           open={snackbar.open}
-          autoHideDuration={60000}
+          autoHideDuration={5000}
           onClose={onCloseSnackbar}
         >
           <Alert
@@ -88,7 +88,7 @@ export default function CustomSnackbar() {
             horizontal: 'center'
           }}
           open={snackbar.open}
-          autoHideDuration={6000}
+          autoHideDuration={5000}
           onClose={onCloseSnackbar}
           message={snackbar.message}
         />
