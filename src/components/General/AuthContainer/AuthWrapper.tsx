@@ -36,14 +36,14 @@ export default function AuthWrapper(props: AuthContainerProps) {
         </Hidden>
         <Hidden mdUp>
           {!props.hideMobileHeader && (
-            <Box className={classes.Header}>
+            <Box className={props.title ? classes.Header : classes.Header2}>
               {!props.showBackIcon && <Box>{props.MobileBackComponent}</Box>}
               {props.showBackIcon && (
                 <IconButton aria-label='back' onClick={goBackFunction}>
                   <Icon name='arrowLeft' w={18} h={18} view='0 0 24 24' />
                 </IconButton>
               )}
-              {props.title ?? <Icon name='logo' w={110} h={200} />}
+              {props.title ?? <Icon name='logo' w={90} h={10} />}
               <Box
                 width={
                   props.showBackIcon || props.BackComponent ? '26px' : '0px'

@@ -1,14 +1,15 @@
-// import { Icon } from '@/components/General';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAppDispatch } from '@/context';
-import { hideSnackbar, showSnackbar } from '@/context/slices/snackbarSlice';
+import { showSnackbar } from '@/context/slices/snackbarSlice';
 import {
   apiHandler,
   getCurrentAccountCookie,
-  setAppToken,
   setCurrentAccountCookie
 } from '@/utils';
-// import { getUserInformationsValidations as validations } from '@/utils/validations/getUserInformationsValidations';
-import convertDateFormat from '@/utils/dateFormat';
+import {
+  gregorianToPersianDate,
+  persianToGregorianDate
+} from '@/utils/dateFormat';
 import { Grid, Stack, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -33,15 +34,6 @@ interface ProfileData {
   pictureId?: string;
 }
 
-// interface InfoData {
-//   id: string;
-//   firstName: string;
-//   lastName: string;
-//   email: string;
-//   pictureId: string;
-//   roles: string[];
-// }
-
 export default function Profile() {
   const t = useTranslations();
   const dispatch = useAppDispatch();
@@ -53,11 +45,10 @@ export default function Profile() {
     formState: { errors }
   } = useForm<ProfileData>();
 
-
   const [showSpinner, setShowSpinner] = useState(false);
   const [id, setId] = useState('');
   const [defaultFile, setDefaultFile] = useState<File | null>(null);
-
+  const [birthDate, setBirthDate] = useState('');
   const [profile, setProfile] = useState<ProfileData>({
     id: '',
     name: '',
@@ -71,75 +62,58 @@ export default function Profile() {
   });
 
   const onSubmit: SubmitHandler<ProfileData> = (data) => {
-    const isoFormattedDate = convertDateFormat(data.birthdate, 'YYYY/MM/DD');
+    const isoFormattedDate = persianToGregorianDate(
+      data.birthdate,
+      'YYYY/MM/DD'
+    );
+    const formData = new FormData();
+
+    formData.append('id', id);
+    if (data.address) formData.append('address', data.address);
+    if (data.birthdate)
+      formData.append('birthdate', new Date(isoFormattedDate).toISOString());
+    if (data.email) formData.append('email', data.email);
+    if (data.name) formData.append('name', data.name);
+    if (data.family) formData.append('family', data.family);
+    if (data.introducerMobile)
+      formData.append('introducerMobile', data.introducerMobile);
+    if (data.nationalKey) formData.append('nationalKey', data.nationalKey);
+    if (data.file) formData.append('file', data.file);
+
+    const handleResponse = (res: any) => {
+      setCurrentAccountCookie(res);
+      setProfile(res);
+      setId(res.id);
+      dispatch(
+        showSnackbar({
+          message: 'اطلاعات با موفقیت ثبت شد',
+          severity: 'success'
+        })
+      );
+    };
+
+    const handleError = (err: any) => {
+      const errorMessage = err.message ? t(err.message) : t('Error 500');
+      dispatch(
+        showSnackbar({
+          message: errorMessage,
+          severity: 'error'
+        })
+      );
+    };
+
+    setShowSpinner(true);
 
     if (data.nationalKey) {
-      if (data.nationalKey.length === 10 && data.nationalKey.length > 0) {
-        const formData = new FormData();
-        formData.append('id', id);
-        if (data.address) {
-          formData.append('address', data.address);
-        }
-        if (data.birthdate) {
-          formData.append(
-            'birthdate',
-            new Date(isoFormattedDate).toISOString()
-          );
-        }
-        if (data.email) {
-          formData.append('email', data.email);
-        }
-        if (data.name) {
-          formData.append('name', data.name);
-        }
-        if (data.family) {
-          formData.append('family', data.family);
-        }
-        if (data.introducerMobile) {
-          formData.append('introducerMobile', data.introducerMobile);
-        }
-        if (data.nationalKey) {
-          formData.append('nationalKey', data.nationalKey);
-        }
-        if (data.file) {
-          formData.append('file', data.file);
-        }
-
-        setShowSpinner(true);
+      if (data.nationalKey.length === 10) {
         apiHandler('/user', 'PUT', formData, true)
-          .then((res) => {
-            setAppToken({ access: res.accessToken, refresh: res.refreshToken });
-            setCurrentAccountCookie(res.profile);
-
-            dispatch(
-              showSnackbar({
-                message: 'ورود با موفقیت انجام شد',
-                severity: 'success'
-              })
-            );
-          })
-          .catch((err) => {
-            if (err.message) {
-              dispatch(
-                showSnackbar({
-                  message: t(err.message),
-                  severity: 'error'
-                })
-              );
-            } else {
-              dispatch(
-                showSnackbar({
-                  message: t('Error 500'),
-                  severity: 'error'
-                })
-              );
-            }
-          })
+          .then(handleResponse)
+          .catch(handleError)
           .finally(() => {
             setShowSpinner(false);
-            dispatch(hideSnackbar());
           });
       } else {
+        setShowSpinner(false);
         dispatch(
           showSnackbar({
             message: 'کد ملی معتبر نمیباشد',
@@ -148,66 +122,11 @@ export default function Profile() {
         );
       }
     } else {
-      const formData = new FormData();
-      formData.append('id', id);
-      if (data.address) {
-        formData.append('address', data.address);
-      }
-      if (data.birthdate) {
-        formData.append('birthdate', new Date(isoFormattedDate).toISOString());
-      }
-      if (data.email) {
-        formData.append('email', data.email);
-      }
-      if (data.name) {
-        formData.append('name', data.name);
-      }
-      if (data.family) {
-        formData.append('family', data.family);
-      }
-      if (data.introducerMobile) {
-        formData.append('introducerMobile', data.introducerMobile);
-      }
-      if (data.nationalKey) {
-        formData.append('nationalKey', data.nationalKey);
-      }
-      if (data.file) {
-        formData.append('file', data.file);
-      }
-
-      setShowSpinner(true);
       apiHandler('/user', 'PUT', formData, true)
-        .then((res) => {
-          setAppToken({ access: res.accessToken, refresh: res.refreshToken });
-          setCurrentAccountCookie(res.profile);
-
-          dispatch(
-            showSnackbar({
-              message: 'ورود با موفقیت انجام شد',
-              severity: 'success'
-            })
-          );
-        })
-        .catch((err) => {
-          if (err.message) {
-            dispatch(
-              showSnackbar({
-                message: t(err.message),
-                severity: 'error'
-              })
-            );
-          } else {
-            dispatch(
-              showSnackbar({
-                message: t('Error 500'),
-                severity: 'error'
-              })
-            );
-          }
-        })
+        .then(handleResponse)
+        .catch(handleError)
         .finally(() => {
           setShowSpinner(false);
-          dispatch(hideSnackbar());
         });
     }
   };
@@ -218,81 +137,43 @@ export default function Profile() {
 
     if (info) {
       newToken = JSON.parse(info);
-      setProfile(newToken);
       setId(newToken.id);
+      console.log("info",id);
     }
   }, []);
 
-
- useEffect(() => {
-   apiHandler(`/user/${profile.id}`, 'GET', true)
-     .then((res) => {
-       setProfile(res);
-
-       if (res.pictureId) {
-         const fetchImage = async () => {
-           try {
-             const response = await fetch(
-               `${process.env.NEXT_PUBLIC_SERVER_URL}/file/getFile?attachmentId=${res.pictureId}`
-             );
-             if (response.ok) {
-               const blob = await response.blob();
-               setDefaultFile(new File([blob], 'filename'));
-
-               // Use setValue to dynamically update the form field
-               setValue('file', new File([blob], 'filename'));
-             } else {
-               console.error('Failed to fetch image:', response.statusText);
-             }
-           } catch (error) {
-             console.error('Error fetching image:', error);
-           }
-         };
-
-         // Fetch image when component mounts
-         fetchImage();
-       }
-     })
-     .catch((err) => {
-       console.error('err', err);
-     });
- }, [id, setValue]);
-
-
-  // useEffect(() => {
-  //   apiHandler(`/user/${profile.id}`, 'GET', true)
-  //     .then((res) => {
-  //       setProfile(res);
-  //     })
-  //     .catch((err) => {
-  //       console.error('err', err);
-  //     });
-
-  //   if (profile.pictureId) {
-  //      const fetchImage = async () => {
-  //        try {
-  //          const response = await fetch(
-  //            `${process.env.NEXT_PUBLIC_SERVER_URL}/file/getFile?attachmentId=${profile.pictureId}`
-  //          );
-  //          if (response.ok) {
-  //            const blob = await response.blob();
-  //            setDefaultFile(new File([blob], 'filename'));
-  //          } else {
-  //            console.error('Failed to fetch image:', response.statusText);
-  //          }
-  //        } catch (error) {
-  //          console.error('Error fetching image:', error);
-  //        }
-  //      };
-
-  //      // Fetch image when component mounts
-  //      fetchImage();
-  //   }
-  // }, [id]);
-
   useEffect(() => {
-    console.log('object', defaultFile);
-  }, [defaultFile]);
+    console.log('1', profile);
+    if(id)
+    apiHandler(`/user/${id}`, 'GET', true)
+      .then((res) => {
+        setProfile(res);
+        setBirthDate(gregorianToPersianDate(res.birthdate));
+
+        if (res.pictureId) {
+          const fetchImage = async () => {
+            try {
+              const response = await fetch(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/file/getFile?attachmentId=${res.pictureId}`
+              );
+              if (response.ok) {
+                const blob = await response.blob();
+                setDefaultFile(new File([blob], 'filename'));
+                setValue('file', new File([blob], 'filename'));
+              } else {
+                console.error('Failed to fetch image:', response.statusText);
+              }
+            } catch (error) {
+              console.error('Error fetching image:', error);
+            }
+          };
+          fetchImage();
+        }
+      })
+      .catch((err) => {
+        console.error('err', err);
+      });
+  }, [id, setValue]);
 
   return (
     <>
@@ -319,6 +200,7 @@ export default function Profile() {
               )}
             />
           </Grid>
+
           <Grid
             item
             xs={12}
@@ -327,11 +209,12 @@ export default function Profile() {
             container
             justifyContent={'center'}
             alignContent={'center'}
+            mt={2}
           >
             <Controller
               control={control}
               name='name'
-              render={({ field: { onChange, value = profile.name } }) => (
+              render={({ field: { onChange, value = profile?.name } }) => (
                 <CustomTextField
                   inputWidth='26.25rem !important'
                   label={t('Name')}
@@ -347,56 +230,8 @@ export default function Profile() {
             />
             <Controller
               control={control}
-              name='introducerMobile'
-              render={({
-                field: { onChange, value = profile.introducerMobile }
-              }) => (
-                <CustomTextField
-                  inputWidth='26.25rem !important'
-                  label={t('Introducer number')}
-                  value={value}
-                  onChange={(e) => {
-                    const newValue = e.target.value;
-                    // Store new value
-                    onChange(newValue);
-                  }}
-                  autoComplete='true'
-                  errorMessage={errors.introducerMobile?.message}
-                />
-              )}
-            />
-
-            <Controller
-              control={control}
-              name='address'
-              render={({ field: { onChange, value = profile.address } }) => (
-                <CustomTextField
-                  inputWidth='26.25rem !important'
-                  label={t('Address')}
-                  value={value}
-                  onChange={(e) => {
-                    const newValue = e.target.value;
-                    onChange(newValue);
-                  }}
-                  autoComplete='true'
-                  errorMessage={errors.address?.message}
-                />
-              )}
-            />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            md={6}
-            gap={3}
-            container
-            justifyContent={'center'}
-            alignContent={'center'}
-          >
-            <Controller
-              control={control}
               name='family'
-              render={({ field: { onChange, value = profile.family } }) => (
+              render={({ field: { onChange, value = profile?.family } }) => (
                 <CustomTextField
                   inputWidth='26.25rem !important'
                   label={t('Family')}
@@ -410,29 +245,12 @@ export default function Profile() {
                 />
               )}
             />
-            <Controller
-              control={control}
-              name='email'
-              render={({ field: { onChange, value = profile.email } }) => (
-                <CustomTextField
-                  inputWidth='26.25rem !important'
-                  label={t('Email')}
-                  value={value}
-                  onChange={(e) => {
-                    const newValue = e.target.value;
-                    // Store new value
-                    onChange(newValue);
-                  }}
-                  autoComplete='true'
-                  errorMessage={errors.email?.message}
-                />
-              )}
-            />
+
             <Controller
               control={control}
               name='nationalKey'
               render={({
-                field: { onChange, value = profile.nationalKey }
+                field: { onChange, value = profile?.nationalKey }
               }) => (
                 <CustomTextField
                   inputWidth='26.25rem !important'
@@ -451,11 +269,77 @@ export default function Profile() {
 
           <Grid
             item
+            xs={12}
+            md={6}
+            gap={3}
+            container
+            justifyContent={'center'}
+            alignContent={'center'}
+            mt={2}
+          >
+            <Controller
+              control={control}
+              name='introducerMobile'
+              render={({
+                field: { onChange, value = profile?.introducerMobile }
+              }) => (
+                <CustomTextField
+                  inputWidth='26.25rem !important'
+                  label={t('Introducer number')}
+                  value={value}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    onChange(newValue);
+                  }}
+                  autoComplete='true'
+                  errorMessage={errors.introducerMobile?.message}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name='email'
+              render={({ field: { onChange, value = profile?.email } }) => (
+                <CustomTextField
+                  inputWidth='26.25rem !important'
+                  label={t('Email')}
+                  value={value}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    // Store new value
+                    onChange(newValue);
+                  }}
+                  autoComplete='true'
+                  errorMessage={errors.email?.message}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name='address'
+              render={({ field: { onChange, value = profile?.address } }) => (
+                <CustomTextField
+                  inputWidth='26.25rem !important'
+                  label={t('Address')}
+                  value={value}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    onChange(newValue);
+                  }}
+                  autoComplete='true'
+                  errorMessage={errors.address?.message}
+                />
+              )}
+            />
+          </Grid>
+
+          <Grid
+            item
             container
             justifyContent={'center'}
             alignContent={'center'}
             md={6}
-            xs={6}
+            xs={12}
             mt={3}
           >
             <Typography margin={'auto 0'} ml={1}>
@@ -464,14 +348,14 @@ export default function Profile() {
             <Controller
               control={control}
               name='birthdate'
-              render={({ field: { onChange, value } }) => (
+              render={({ field: { onChange, value = birthDate } }) => (
                 <>
                   <DatePicker
                     calendar={persian}
                     locale={persian_fa}
                     calendarPosition='bottom-right'
                     placeholder='لطفا تاریخ را انتخاب کنید'
-                    value={value || ''}
+                    value={value}
                     // eslint-disable-next-line react/jsx-key
                     plugins={[<Toolbar position='bottom' />]}
                     onChange={(date) => {
@@ -479,24 +363,6 @@ export default function Profile() {
                     }}
                     style={{ width: '23rem' }}
                   />
-                  {/* {errors && errors[name] && (
-                    <Stack
-                      flexDirection='row'
-                      alignItems='center'
-                      gap='0.25rem'
-                      width='27.8rem'
-                    >
-                      <Stack>
-                        <Icon name='error' w={12} h={12} view='0 0 12 12' />
-                      </Stack>
-
-                      <div>
-                        <Typography variant='caption' className='error-message'>
-                          تاریخ را انتخاب کنید{' '}
-                        </Typography>
-                      </div>
-                    </Stack>
-                  )} */}
                 </>
               )}
             />
@@ -508,7 +374,7 @@ export default function Profile() {
             justifyContent={'center'}
             alignContent={'center'}
             md={6}
-            xs={6}
+            xs={12}
             mt={3}
           >
             <SubmitButton width='27.8rem' disabled={showSpinner}>

@@ -58,7 +58,15 @@ export default async function apiHandler(
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}${uri}`,
     fetchOptions
-  );
+  ).catch((error) => {
+    console.error('Fetch error:', error);
+    throw error; // Rethrow the original error
+  });
+
+  if (res.status === 204) {
+    // No content, return null or handle accordingly
+    return null;
+  }
 
   if (res.status < 400) {
     try {
