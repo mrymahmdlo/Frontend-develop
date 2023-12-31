@@ -62,6 +62,8 @@ export default function Profile() {
   });
 
   const onSubmit: SubmitHandler<ProfileData> = (data) => {
+    console.log('profile', profile);
+    console.log('data', data);
     const isoFormattedDate = persianToGregorianDate(
       data.birthdate,
       'YYYY/MM/DD'
@@ -69,16 +71,48 @@ export default function Profile() {
     const formData = new FormData();
 
     formData.append('id', id);
-    if (data.address) formData.append('address', data.address);
-    if (data.birthdate)
+    if (data.address) {
+      formData.append('address', data.address);
+    } else if (data.address == '') {
+      formData.append('address', '');
+    }
+    if (data.birthdate) {
       formData.append('birthdate', new Date(isoFormattedDate).toISOString());
-    if (data.email) formData.append('email', data.email);
-    if (data.name) formData.append('name', data.name);
-    if (data.family) formData.append('family', data.family);
-    if (data.introducerMobile)
-      formData.append('introducerMobile', data.introducerMobile);
-    if (data.nationalKey) formData.append('nationalKey', data.nationalKey);
-    if (data.file) formData.append('file', data.file);
+    } else if (data.birthdate == null) {
+      formData.append('birthdate', '');
+    }
+    if (data.email) {
+      formData.append('email', data.email);
+    } else if (data.email == '') {
+      formData.append('email', '');
+    }
+    if (data.name) {
+      formData.append('name', data.name);
+    } else if (data.name == '') {
+      formData.append('name', '');
+    }
+    if (data.family) {
+      formData.append('family', data.family);
+    } else if (data.family == '') {
+      formData.append('family', '');
+    }
+    if (!profile.introducerMobile) {
+      if (data.introducerMobile) {
+        formData.append('introducerMobile', data.introducerMobile);
+      } else {
+        formData.append('introducerMobile', '');
+      }
+    }
+    if (data.nationalKey) {
+      formData.append('nationalKey', data.nationalKey);
+    } else if (data.nationalKey == '') {
+      formData.append('nationalKey', '');
+    }
+    if (data.file) {
+      formData.append('file', data.file);
+    } else {
+      formData.append('file', '');
+    }
 
     const handleResponse = (res: any) => {
       setCurrentAccountCookie(res);
@@ -138,41 +172,41 @@ export default function Profile() {
     if (info) {
       newToken = JSON.parse(info);
       setId(newToken.id);
-      console.log("info",id);
+      console.log('info', id);
     }
   }, []);
 
   useEffect(() => {
     console.log('1', profile);
-    if(id)
-    apiHandler(`/user/${id}`, 'GET', true)
-      .then((res) => {
-        setProfile(res);
-        setBirthDate(gregorianToPersianDate(res.birthdate));
+    if (id)
+      apiHandler(`/user/${id}`, 'GET', true)
+        .then((res) => {
+          setProfile(res);
+          setBirthDate(gregorianToPersianDate(res.birthdate));
 
-        if (res.pictureId) {
-          const fetchImage = async () => {
-            try {
-              const response = await fetch(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/file/getFile?attachmentId=${res.pictureId}`
-              );
-              if (response.ok) {
-                const blob = await response.blob();
-                setDefaultFile(new File([blob], 'filename'));
-                setValue('file', new File([blob], 'filename'));
-              } else {
-                console.error('Failed to fetch image:', response.statusText);
+          if (res.pictureId) {
+            const fetchImage = async () => {
+              try {
+                const response = await fetch(
+                  `${process.env.NEXT_PUBLIC_SERVER_URL}/file/getFile?attachmentId=${res.pictureId}`
+                );
+                if (response.ok) {
+                  const blob = await response.blob();
+                  setDefaultFile(new File([blob], 'filename'));
+                  setValue('file', new File([blob], 'filename'));
+                } else {
+                  console.error('Failed to fetch image:', response.statusText);
+                }
+              } catch (error) {
+                console.error('Error fetching image:', error);
               }
-            } catch (error) {
-              console.error('Error fetching image:', error);
-            }
-          };
-          fetchImage();
-        }
-      })
-      .catch((err) => {
-        console.error('err', err);
-      });
+            };
+            fetchImage();
+          }
+        })
+        .catch((err) => {
+          console.error('err', err);
+        });
   }, [id, setValue]);
 
   return (
