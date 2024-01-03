@@ -7,7 +7,6 @@ export const getAppToken = () => {
 };
 
 export const setAppToken = (token: TokenType) => {
-  // #TODO handle expiration
   setCookie('DGB_token', token);
 };
 

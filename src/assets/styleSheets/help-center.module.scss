@@ -19,7 +19,6 @@
     padding: 28px;
     box-shadow: none;
     background-color: white;
-    min-height: 500px;
 
     @media screen and (max-width: 900px) {
       margin: 0;
@@ -29,6 +28,7 @@
 
     .TitleContainer {
       padding-bottom: 28px;
+      direction: ltr;
 
       .BackIconButton {
         padding: 0;

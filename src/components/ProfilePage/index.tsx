@@ -62,8 +62,6 @@ export default function Profile() {
   });
 
   const onSubmit: SubmitHandler<ProfileData> = (data) => {
-    console.log('profile', profile);
-    console.log('data', data);
     const isoFormattedDate = persianToGregorianDate(
       data.birthdate,
       'YYYY/MM/DD'

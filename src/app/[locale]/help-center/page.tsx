@@ -15,7 +15,7 @@ export default function HelpCenter() {
   return (
     <>
       <Head>
-        <title>{t('help center')}</title>
+        <title>{t('Help center')}</title>
       </Head>
       <AuthContainer fillContainer hideMobileHeader>
         <Questions />

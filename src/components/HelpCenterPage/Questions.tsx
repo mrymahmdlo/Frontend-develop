@@ -16,13 +16,10 @@ import {
 
 // local imports
 import Icon from '@/components/General/Icon';
-import { apiHandler } from '@/utils';
 import GrayDotSpinner from '../General/DotSpinnerGray';
-
+import qa from './question.json'
 // styles
 import classes from '@/assets/styleSheets/help-center.module.scss';
-import { useAppDispatch } from '@/context';
-import { showSnackbar } from '@/context/slices/snackbarSlice';
 
 type QuestionType = {
   question: string;
@@ -40,7 +37,6 @@ export default function Questions() {
     };
 
   const router = useRouter();
-  const dispatch = useAppDispatch();
 
   function backPreviousPage() {
     router.back();
@@ -48,18 +44,7 @@ export default function Questions() {
 
   // use api route approach  @parna
   useEffect(() => {
-    apiHandler('api/content/help-center/')
-      .then((res) => {
-        setQuestions(res.results);
-      })
-      .catch(() => {
-        dispatch(
-          showSnackbar({
-            message: t('You are offline'),
-            severity: 'error'
-          })
-        );
-      });
+   setQuestions(qa)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

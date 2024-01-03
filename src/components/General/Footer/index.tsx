@@ -155,27 +155,6 @@ function Footer({ isNews }: IntProps) {
             </Grid>
             <Grid item xs={12} md={2}>
               <Typography mb={'16px'} fontSize={'18px'} fontWeight={600}>
-                ارتباطات
-              </Typography>
-              <Grid item display={'grid'} className={style.AlignDots}>
-                {Object.entries(links.Community)
-                  .filter((obj) => obj[0] !== 'length')
-                  .map(([key, value]) => (
-                    <Link
-                      key={key}
-                      href={value}
-                      underline='none'
-                      display={'list-item'}
-                      m={1}
-                      className={style.Items}
-                    >
-                      {key}
-                    </Link>
-                  ))}
-              </Grid>
-            </Grid>
-            <Grid item xs={12} md={2}>
-              <Typography mb={'16px'} fontSize={'18px'} fontWeight={600}>
                 لینک های سریع
               </Typography>
               <Grid item display={'grid'} className={style.AlignDots}>
@@ -194,6 +173,21 @@ function Footer({ isNews }: IntProps) {
                     </Link>
                   ))}
               </Grid>
+            </Grid>
+
+            <Grid item xs={12} md={2}>
+              <Typography
+                component={Link}
+                href='/help-center'
+                mb={'16px'}
+                fontSize={'18px'}
+                fontWeight={600}
+                underline='hover'
+                display={'list-item'}
+              >
+                سوالات متداول
+              </Typography>
+          
             </Grid>
           </Grid>
         </Container>

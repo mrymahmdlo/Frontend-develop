@@ -1,7 +1,6 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -103,13 +102,7 @@ export default function ForgetPasswordForm(props: ForgetPasswordFormProps) {
           />
         </TabPanel>
       </Box>
-      <Typography
-        component={Link}
-        href='/help-center'
-        className={classes.HelpCenterLink}
-      >
-        {t('Can’t reset your password?')}
-      </Typography>
+
       <Box className={classes.ButtonContainer}>
         <Grid container>
           {/* Submit btn */}

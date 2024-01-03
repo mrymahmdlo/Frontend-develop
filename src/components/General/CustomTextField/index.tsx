@@ -6,12 +6,14 @@ interface IntProps extends StandardTextFieldProps {
   errorMessage?: string;
   inputWidth?: string;
   borderRadius?: string | number;
+  w?: string;
 }
 
 export default function CustomTextField({
   errorMessage,
   inputWidth,
   borderRadius = '0.5rem',
+  w,
   ...props
 }: IntProps) {
   return (
@@ -37,7 +39,8 @@ export default function CustomTextField({
               'border-color',
               'background-color',
               'box-shadow'
-            ])
+            ]),
+            width: w
           },
           '& input': {
             width: inputWidth ? inputWidth : '100%'

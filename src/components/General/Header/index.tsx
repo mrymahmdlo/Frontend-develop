@@ -11,7 +11,6 @@ import SearchBox from './SearchBox';
 
 // styles
 import classes from '@/assets/styleSheets/General/MainHeader.module.scss';
-import { useAppSelector } from '@/context';
 
 interface HeaderProps {
   showSearch?: boolean;
@@ -19,10 +18,8 @@ interface HeaderProps {
 
 export default function MainHeader(props: HeaderProps) {
   const [auth] = useState(true);
-  // Get user current location to set it as default value
-  const userCurrentLocation = useAppSelector(
-    (state) => state.userCurrentLocation.value
-  );
+
+  
 
   return (
     <Hidden mdDown>
@@ -32,12 +29,6 @@ export default function MainHeader(props: HeaderProps) {
             <Toolbar disableGutters>
               <Link href='/' className={classes.Logo}>
                 <Icon name='logo' w={200} h={20}></Icon>
-
-                {/* Country code */}
-                {userCurrentLocation !== null &&
-                  userCurrentLocation?.country_short !== '-' && (
-                    <span>{userCurrentLocation.country_short}</span>
-                  )}
               </Link>
             </Toolbar>
             <Toolbar>{props.showSearch && <SearchBox />}</Toolbar>
