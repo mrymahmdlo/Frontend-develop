@@ -35,7 +35,6 @@ function getStyles(name: string, personName: string, theme: Theme) {
         : theme.typography.fontWeightMedium
   };
 }
-// ... (previous imports)
 
 const MultipleSelect: React.FC<MultipleSelectProps> = ({
   isMulti,

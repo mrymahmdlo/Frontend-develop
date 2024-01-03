@@ -51,7 +51,7 @@ export default function VerificationCodeForm({
             severity: 'success'
           })
         );
-        router.push('/profile');
+        router.push('/');
       })
       .catch((err) => {
         if (err.message) {
