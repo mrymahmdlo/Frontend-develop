@@ -37,5 +37,11 @@ export default function HeaderMenu() {
       </Grid>
     );
   }
-  return <></>;
+  return (
+    <>
+      <Grid>
+        <Button onClick={() => router.push('/on-boarding')}>ورود/ثبت نام</Button>
+      </Grid>
+    </>
+  );
 }

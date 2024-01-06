@@ -32,7 +32,7 @@ export const unitGroup = [
   },
   {
     label: 'برق صنعت',
-    value: 'INDUSTRY_ELECTRICITY'
+    value: 'INDUSTRY_POWER'
   },
   {
     label: 'برق ماشین',
@@ -45,6 +45,37 @@ export const unitGroup = [
   {
     label: 'موبایل و کامپیوتر',
     value: 'MOBILE_AND_COMPUTER'
+  }
+];
+
+export const unitGroupSERVICES = [
+  {
+    label: 'برقکاران ساختمان',
+    value: 'BUILDING_ELECTRICITY'
+  },
+  {
+    label: 'برقکاران صنعتی',
+    value: 'BUILDING_ELECTRICITY'
+  },
+  {
+    label: 'خدمات الکترونیک',
+    value: 'ELECTRONIC_SERVICES'
+  },
+  {
+    label: 'خدمات برق خودرو',
+    value: 'CAR_ELECTRICITY_SERVICES'
+  },
+  {
+    label: 'تعمیر لوازم خانگی',
+    value: 'APPLIANCE_REPAIR'
+  },
+  {
+    label: 'تعمیرات موبایل',
+    value: 'MOBILE_REPAIRS'
+  },
+  {
+    label: 'تعمیرات کامپیوتر',
+    value: 'COMPUTER_REPAIR'
   }
 ];
 

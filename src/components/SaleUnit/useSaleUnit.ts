@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 
 // local imports
@@ -8,19 +9,20 @@ type Stages = 'stepOne' | 'stepTwo';
 
 export default function useSaleUnit() {
   const [stage, setStage] = useState<Stages>('stepOne');
-//   const [unit, setUnit] = useState();
+  const [response, setResponse] = useState<any>(null);
+  const [id, setId] = useState<string>("");
 
-  function unitOne() {
-      setStage('stepTwo');
-    //   setUnit(res)
+  function unitOne(res:any) {
+    setStage('stepTwo');
+    setResponse(res);
+    setId(res.id)
+    console.log(res.id);
   }
-
-    // function unitTwo(id: string) {
-    //   setIdentifier({ ...identifier, id });
-    // }
 
   return {
     stage,
-    unitOne
+    unitOne,
+    response,
+    id
   };
 }
