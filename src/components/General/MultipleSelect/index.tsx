@@ -3,7 +3,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Theme, useTheme } from '@mui/material/styles';
+// import { Theme, useTheme } from '@mui/material/styles';
 import * as React from 'react';
 
 const ITEM_HEIGHT = 48;
@@ -27,14 +27,14 @@ interface MultipleSelectProps {
   onChange: (value: string[]) => void;
 }
 
-function getStyles(name: string, personName: string, theme: Theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium
-  };
-}
+// function getStyles(name: string, personName: string, theme: Theme) {
+//   return {
+//     fontWeight:
+//       personName.indexOf(name) === -1
+//         ? theme.typography.fontWeightRegular
+//         : theme.typography.fontWeightMedium
+//   };
+// }
 
 const MultipleSelect: React.FC<MultipleSelectProps> = ({
   isMulti,
@@ -45,7 +45,7 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({
   showInput,
   onChange
 }) => {
-  const theme = useTheme();
+  // const theme = useTheme();
 
   const handleChange = (event: SelectChangeEvent<typeof value>) => {
     const {
@@ -75,7 +75,7 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({
           <MenuItem
             key={value}
             value={value}
-            style={getStyles(value, value, theme)} // Using value as the name for getStyles
+            // style={getStyles(value, value, theme)} // Using value as the name for getStyles
           >
             {showInput[index]}
           </MenuItem>

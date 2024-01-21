@@ -38,6 +38,7 @@ import GreenCheck from '@/assets/svgs/green-check.svg';
 import LinkedIn from '@/assets/svgs/linkedIn.svg';
 import Lock from '@/assets/svgs/lock.svg';
 import Logo from '@/assets/svgs/logo.svg';
+import LogOut from '@/assets/svgs/logout.svg';
 import Men from '@/assets/svgs/men.svg';
 import Meta from '@/assets/svgs/meta.svg';
 import Netflix from '@/assets/svgs/netflix.svg';
@@ -115,7 +116,8 @@ export const icons = {
   selectArrow: <SelectArrow />,
   danger: <Danger />,
   tickCircle: <TickCircle />,
-  user: <User />
+  user: <User />,
+  logOut: <LogOut />
 };
 
 export type IconsListType = keyof typeof icons;

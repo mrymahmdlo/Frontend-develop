@@ -2,9 +2,10 @@
 import { useAppDispatch } from '@/context';
 import { showSnackbar } from '@/context/slices/snackbarSlice';
 import { apiHandler } from '@/utils';
+import getWithToken from '@/utils/getWithToken';
 import { Button, Grid, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { CustomTextField, DotSpinner, SubmitButton } from '../General';
 import MultipleSelect from '../General/MultipleSelect';
@@ -31,6 +32,11 @@ interface SaleData {
 
 interface SaleUnitProps {
   unitOne: (user: string) => void;
+}
+
+interface EnumProps {
+  name: string;
+  id: any;
 }
 
 export default function SaleUnitOne(props: SaleUnitProps) {
@@ -125,6 +131,37 @@ export default function SaleUnitOne(props: SaleUnitProps) {
 
   const [phoneNumbers, setPhoneNumbers] = useState<string[]>(['']);
 
+  const [proviceList, setProviceList] = useState<EnumProps[]>([]);
+  const [selectedProviceList, setSelectedProviceList] = useState<string[]>([]);
+  const handleSelectedProviceListChange = (newValues: string[]) => {
+    setSelectedProviceList(newValues);
+    getWithToken(`/city/byProvince/${newValues}?page=0&size=50`, 'GET')
+      .then((res) => {
+        setCityList(res.content);
+      })
+      .catch((err) => {
+        console.error('err', err);
+      });
+  };
+
+  const [cityList, setCityList] = useState<EnumProps[]>([]);
+  const [selectedCityList, setSelectedCityList] = useState<string[]>([]);
+  const handleSelectedCityListChange = (newValues: string[]) => {
+    setSelectedCityList(newValues);
+    getWithToken(`/street/byCity/${newValues}?page=0&size=50`, 'GET')
+      .then((res) => {
+        setStreetList(res.content);
+      })
+      .catch((err) => {
+        console.error('err', err);
+      });
+  };
+
+  const [streetList, setStreetList] = useState<EnumProps[]>([]);
+  const [selectedStreetList, setSelectedStreetList] = useState<string[]>([]);
+  const handleSelectedStreetListChange = (newValues: string[]) => {
+    setSelectedStreetList(newValues);
+  };
   const handleAddPhoneNumber = () => {
     setPhoneNumbers((prevPhoneNumbers) => [...prevPhoneNumbers, '']);
   };
@@ -135,13 +172,27 @@ export default function SaleUnitOne(props: SaleUnitProps) {
     }
   };
 
+  useEffect(() => {
+    getWithToken(`/province?page=0&size=50`, 'GET')
+      .then((res) => {
+        setProviceList(res.content);
+      })
+      .catch((err) => {
+        console.error('err', err);
+      });
+  }, []);
+
   const onSubmit: SubmitHandler<SaleData> = (data) => {
+    const address =
+      selectedProviceList.toString() +
+      selectedCityList.toString() +
+      selectedStreetList.toString();
     const request = {
       unitType: selectedUnitType[0],
       unitGroup: selectedUnitGroup[0],
       activityType: selectedActivityType[0],
       name: data.name,
-      address: data.address,
+      address: address,
       bio: data.bio,
       phoneNumbers: data.phoneNumbers,
       merchantCardNo: data.merchantCardNo,
@@ -365,23 +416,68 @@ export default function SaleUnitOne(props: SaleUnitProps) {
             ) : null}
           </Grid>
           <Grid item xs={12} md={6} gap={3} container>
-            <Controller
-              control={control}
-              name='address'
-              render={({ field: { onChange, value } }) => (
-                <CustomTextField
-                  inputWidth='26.25rem !important'
-                  label='آدرس کسب و کار'
-                  value={value}
-                  onChange={(e) => {
-                    const newValue = e.target.value;
-                    onChange(newValue);
-                  }}
-                  autoComplete='true'
-                  errorMessage={errors.address?.message}
-                />
-              )}
-            />
+            {proviceList ? (
+              <Controller
+                control={control}
+                name='address'
+                render={() => (
+                  <>
+                    <MultipleSelect
+                      label='استان'
+                      isMulti={false}
+                      options={proviceList.map((k) => k.id)}
+                      showInput={proviceList.map((k) => k.name)}
+                      value={selectedProviceList}
+                      onChange={handleSelectedProviceListChange}
+                    />
+                  </>
+                )}
+              />
+            ) : (
+              <DotSpinner />
+            )}
+
+            {cityList ? (
+              <Controller
+                control={control}
+                name='address'
+                render={() => (
+                  <>
+                    <MultipleSelect
+                      label='شهر'
+                      isMulti={false}
+                      options={cityList.map((k) => k.id)}
+                      showInput={cityList.map((k) => k.name)}
+                      value={selectedCityList}
+                      onChange={handleSelectedCityListChange}
+                    />
+                  </>
+                )}
+              />
+            ) : (
+              <DotSpinner />
+            )}
+
+            {streetList ? (
+              <Controller
+                control={control}
+                name='address'
+                render={() => (
+                  <>
+                    <MultipleSelect
+                      label='خیابان'
+                      isMulti={false}
+                      options={streetList.map((k) => k.id)}
+                      showInput={streetList.map((k) => k.name)}
+                      value={selectedStreetList}
+                      onChange={handleSelectedStreetListChange}
+                    />
+                  </>
+                )}
+              />
+            ) : (
+              <DotSpinner />
+            )}
 
             <Controller
               control={control}

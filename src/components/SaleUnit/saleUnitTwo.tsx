@@ -15,8 +15,6 @@ export default function SaleUnitTwo(response: any) {
   const router = useRouter();
 
   const handleUpload = (files: File[]) => {
-    console.log('response', response.response);
-    console.log(files[0]);
     const formData = new FormData();
 
     formData.append('file', files[0]);
@@ -24,8 +22,7 @@ export default function SaleUnitTwo(response: any) {
     formData.append('saleUnitDocumentType', 'PROFILE');
 
     apiHandler('/saleUnit/setFile', 'PUT', formData, true)
-      .then((res) => {
-        console.log('res', res);
+      .then(() => {
         dispatch(
           showSnackbar({
             message: 'فایل با موفقیت بارگذاری شد',
@@ -60,8 +57,7 @@ export default function SaleUnitTwo(response: any) {
     formData.append('saleUnitDocumentType', type);
 
     apiHandler('/saleUnit/setFile', 'PUT', formData, true)
-      .then((res) => {
-        console.log('res', res);
+      .then(() => {
         dispatch(
           showSnackbar({
             message: 'فایل با موفقیت بارگذاری شد',
