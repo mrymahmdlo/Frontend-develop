@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, alpha } from '@mui/material';
 
 interface IntSelectableButton {
   children: React.ReactNode;
@@ -20,16 +20,16 @@ export default function SelectableButton({
         borderRadius: '0.5rem',
         border: '1px',
         backgroundColor: isActive
-          ? theme.palette.primary['500']
-          : theme.palette.gray['100'],
+          ? alpha(theme.palette.primary['500'], 1)
+          : alpha(theme.palette.gray['100'], 1),
         borderColor: isActive
-          ? theme.palette.primary['500']
-          : theme.palette.gray['200'],
+          ? alpha(theme.palette.primary['500'], 1)
+          : alpha(theme.palette.gray['200'], 1),
         boxShadow: 'none',
         '&:active, &:focus, &:hover': {
           backgroundColor: isActive
-            ? theme.palette.primary['600']
-            : theme.palette.gray['200'],
+            ? alpha(theme.palette.primary['600'], 1)
+            : alpha(theme.palette.gray['200'], 1),
           boxShadow: 'none'
         }
       })}

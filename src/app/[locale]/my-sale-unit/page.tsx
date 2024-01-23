@@ -1,11 +1,11 @@
 'use client';
 import { AuthContainer } from '@/components/General';
-import SaleUnit from '@/components/SaleUnit';
+import MYSaleUnit from '@/components/MySaleUnit/index';
 
-export default function onBoarding() {
+export default function MySaleUnit() {
   return (
     <AuthContainer fillContainer>
-      <SaleUnit />
+      <MYSaleUnit />
     </AuthContainer>
   );
 }

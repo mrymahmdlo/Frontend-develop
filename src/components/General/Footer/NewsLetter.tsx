@@ -1,6 +1,6 @@
 import style from '@/assets/styleSheets/General/Footer.module.scss';
 import Icon from '@/components/General/Icon';
-import { Button, Grid, TextField, Typography } from '@mui/material';
+import { Button, Grid, TextField, Typography, alpha } from '@mui/material';
 
 function NewsLetter() {
   return (
@@ -39,7 +39,7 @@ function NewsLetter() {
             sx={(theme) => ({
               width: '100%',
               '& label': {
-                color: `${theme.palette.gray.main} !important`,
+                color: `${alpha(theme.palette.gray.main,1)} !important`,
                 height: '60px',
                 right: 0,
                 marginRight: '2em',

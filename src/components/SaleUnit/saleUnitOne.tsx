@@ -16,12 +16,14 @@ import {
   unitType
 } from './saleUnitEnum';
 
+
 interface SaleData {
   unitType: string;
   unitGroup: string;
   activityType: string;
   name: string;
   address: string;
+  streetId: string;
   bio: string;
   phoneNumbers: string[];
   licenseNo: string;
@@ -183,16 +185,13 @@ export default function SaleUnitOne(props: SaleUnitProps) {
   }, []);
 
   const onSubmit: SubmitHandler<SaleData> = (data) => {
-    const address =
-      selectedProviceList.toString() +
-      selectedCityList.toString() +
-      selectedStreetList.toString();
     const request = {
       unitType: selectedUnitType[0],
       unitGroup: selectedUnitGroup[0],
       activityType: selectedActivityType[0],
       name: data.name,
-      address: address,
+      streetId: selectedStreetList.toString(),
+      address: data.address,
       bio: data.bio,
       phoneNumbers: data.phoneNumbers,
       merchantCardNo: data.merchantCardNo,
@@ -419,7 +418,7 @@ export default function SaleUnitOne(props: SaleUnitProps) {
             {proviceList ? (
               <Controller
                 control={control}
-                name='address'
+                name='streetId'
                 render={() => (
                   <>
                     <MultipleSelect
@@ -440,7 +439,7 @@ export default function SaleUnitOne(props: SaleUnitProps) {
             {cityList ? (
               <Controller
                 control={control}
-                name='address'
+                name='streetId'
                 render={() => (
                   <>
                     <MultipleSelect
@@ -461,7 +460,7 @@ export default function SaleUnitOne(props: SaleUnitProps) {
             {streetList ? (
               <Controller
                 control={control}
-                name='address'
+                name='streetId'
                 render={() => (
                   <>
                     <MultipleSelect
@@ -478,6 +477,24 @@ export default function SaleUnitOne(props: SaleUnitProps) {
             ) : (
               <DotSpinner />
             )}
+
+            <Controller
+              control={control}
+              name='address'
+              render={({ field: { onChange, value } }) => (
+                <CustomTextField
+                  inputWidth='26.25rem !important'
+                  label='آدرس کسب و کار '
+                  value={value}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    onChange(newValue);
+                  }}
+                  autoComplete='true'
+                  errorMessage={errors.name?.message}
+                />
+              )}
+            />
 
             <Controller
               control={control}

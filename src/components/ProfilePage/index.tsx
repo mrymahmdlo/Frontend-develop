@@ -10,8 +10,9 @@ import {
   gregorianToPersianDate,
   persianToGregorianDate
 } from '@/utils/dateFormat';
-import { Grid, Stack, Typography } from '@mui/material';
+import { Button, Grid, Stack, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
@@ -37,6 +38,7 @@ interface ProfileData {
 export default function Profile() {
   const t = useTranslations();
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const {
     control,
@@ -170,12 +172,10 @@ export default function Profile() {
     if (info) {
       newToken = JSON.parse(info);
       setId(newToken.id);
-      console.log('info', id);
     }
   }, []);
 
   useEffect(() => {
-    console.log('1', profile);
     if (id)
       apiHandler(`/user/${id}`, 'GET', true)
         .then((res) => {
@@ -219,18 +219,36 @@ export default function Profile() {
           justifyContent={'space-between'}
           alignContent={'center'}
         >
-          <Grid item md={12} xs={12} m={3} mr={8}>
-            <Controller
-              name='file'
-              control={control}
-              defaultValue={defaultFile}
-              render={({ field }) => (
-                <AvatarComponent
-                  file={field.value}
-                  onChange={(file) => field.onChange(file)}
-                />
-              )}
-            />
+          <Grid
+            item
+            md={12}
+            xs={12}
+            m={3}
+            display={'flex'}
+            justifyContent={'space-between'}
+          >
+            <Grid item>
+              <Controller
+                name='file'
+                control={control}
+                defaultValue={defaultFile}
+                render={({ field }) => (
+                  <AvatarComponent
+                    file={field.value}
+                    onChange={(file) => field.onChange(file)}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item display={'flow'} alignSelf={'center'}>
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={() => router.push('/my-sale-unit')}
+              >
+                واحدهای صنفی من
+              </Button>
+            </Grid>
           </Grid>
 
           <Grid

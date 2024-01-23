@@ -1,5 +1,5 @@
 import { Icon } from '@/components/General';
-import { OutlinedInputProps, Stack, Typography } from '@mui/material';
+import { OutlinedInputProps, Stack, Typography, alpha } from '@mui/material';
 import TextField, { StandardTextFieldProps } from '@mui/material/TextField';
 
 interface IntProps extends StandardTextFieldProps {
@@ -25,16 +25,16 @@ export default function CustomTextField({
         sx={(theme) => ({
           width: '100%',
           '& label': {
-            color: `${theme.palette.gray.main} !important`
+            color: `${alpha(theme.palette.gray.main, 1)} !important`
           },
           '& .MuiFilledInput-root': {
             border: `1px solid`,
             borderColor: errorMessage
-              ? theme.palette.error.main
-              : theme.palette.gray['100'],
+              ? alpha(theme.palette.error.main, 1)
+              : alpha(theme.palette.gray['100'],1),
             overflow: 'hidden',
             borderRadius: { borderRadius },
-            backgroundColor: theme.palette.gray['100'],
+            backgroundColor: alpha(theme.palette.gray[200], 1),
             transition: theme.transitions.create([
               'border-color',
               'background-color',

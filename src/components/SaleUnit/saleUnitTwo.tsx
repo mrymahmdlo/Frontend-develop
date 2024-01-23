@@ -2,7 +2,7 @@
 import { useAppDispatch } from '@/context';
 import { showSnackbar } from '@/context/slices/snackbarSlice';
 import { apiHandler } from '@/utils';
-import { Button, Grid } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -12,6 +12,7 @@ export default function SaleUnitTwo(response: any) {
   const dispatch = useAppDispatch();
   const t = useTranslations();
   const [type, setType] = useState<string>('');
+  const [isUpload, setIsUpload] = useState<boolean>(false);
   const router = useRouter();
 
   const handleUpload = (files: File[]) => {
@@ -64,6 +65,7 @@ export default function SaleUnitTwo(response: any) {
             severity: 'success'
           })
         );
+        setIsUpload(true);
       })
       .catch((err) => {
         if (err.message) {
@@ -95,24 +97,35 @@ export default function SaleUnitTwo(response: any) {
     <>
       <Grid container gap={1} justifyContent={'space-between'}>
         <FileUploader onUpload={handleUpload} title='تصویر واحد صنفی' />
-
-        {response.response?.licenseNo && (
+        {!isUpload && response.response?.licenseNo && (
           <FileUploader
             onUpload={handleUploadType}
             title='تصویر پروانه بهره برداری '
           />
         )}
-        {response.response?.registrationNo && (
+        {!isUpload && response.response?.registrationNo && (
           <FileUploader onUpload={handleUploadType} title='تصویر ثبت شرکت  ' />
         )}
-        {response.response?.operationLicenseNo && (
+        {!isUpload && response.response?.operationLicenseNo && (
           <FileUploader onUpload={handleUploadType} title='تصویر جواز کسب  ' />
         )}
-        {response.response?.merchantCardNo && (
+        {!isUpload && response.response?.merchantCardNo && (
           <FileUploader
             onUpload={handleUploadType}
             title='تصویر کارت بازرگانی'
           />
+        )}
+        {isUpload && (
+          <Grid container md={5} xs={12} display={'flow'}>
+            <Typography
+              variant='h6'
+              color={'primary'}
+              textAlign={'center'}
+              mb={3}
+            >
+              تصویر قبلا بارگذاری شده است
+            </Typography>
+          </Grid>
         )}
       </Grid>
       <Grid mt={3} container justifyContent={'center'}>
