@@ -10,12 +10,14 @@ import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
+import { useRouter } from 'next/navigation';
 import * as React from 'react';
-import { activityType, unitType } from '../SaleUnit/saleUnitEnum';
+import { activityType, unitType } from '../saleUnitEnum';
 
 interface MediaProps {
   loading?: boolean;
   data?: {
+    id: number;
     name: string;
     unitType: string;
     activityType: string;
@@ -44,6 +46,7 @@ export default function Media(props: MediaProps) {
   const { loading, data } = props;
   const [defaultFile, setDefaultFile] = React.useState<File | null>(null);
   const [defaultPic, setDefaultPic] = React.useState<File | null>(null);
+  const router = useRouter();
 
   React.useEffect(() => {
     if (data?.saleUnitDocuments) {
@@ -112,7 +115,10 @@ export default function Media(props: MediaProps) {
         }
         action={
           loading ? null : (
-            <IconButton aria-label='settings'>
+            <IconButton
+              onClick={() => router.push(`/sale-unit/${data?.id}`)}
+              aria-label='settings'
+            >
               <MoreVertIcon />
             </IconButton>
           )

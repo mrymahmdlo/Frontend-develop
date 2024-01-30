@@ -244,7 +244,7 @@ export default function Profile() {
               <Button
                 variant='contained'
                 color='primary'
-                onClick={() => router.push('/my-sale-unit')}
+                onClick={() => router.push('/sale-unit/my-sale-unit')}
               >
                 واحدهای صنفی من
               </Button>
