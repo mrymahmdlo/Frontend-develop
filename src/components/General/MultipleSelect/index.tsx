@@ -19,6 +19,7 @@ const MenuProps = {
 
 interface MultipleSelectProps {
   isMulti: boolean;
+  disable?: boolean;
   w?: string;
   label: string;
   options: string[];
@@ -38,6 +39,7 @@ interface MultipleSelectProps {
 
 const MultipleSelect: React.FC<MultipleSelectProps> = ({
   isMulti,
+  disable,
   w,
   label,
   options,
@@ -70,6 +72,7 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({
         onChange={handleChange}
         input={<OutlinedInput label={label} />}
         MenuProps={MenuProps}
+        disabled={disable ? disable : false}
       >
         {options.map((value, index) => (
           <MenuItem

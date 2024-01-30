@@ -1,11 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { AuthContainer } from '@/components/General';
+import SaleUnitById from '@/components/SaleUnit/SaleUnitById';
 
-export default function SaleUnitById({ params }: { params: { slug: string } }) {
-  console.log(params);
+interface Params {
+  params: {
+    id: number;
+    locale: string;
+  };
+}
+
+export default function SaleUniId(params: Params) {
   return (
     <AuthContainer fillContainer>
-      <h1>hello</h1>
+      <SaleUnitById id={params.params.id} />
     </AuthContainer>
   );
 }

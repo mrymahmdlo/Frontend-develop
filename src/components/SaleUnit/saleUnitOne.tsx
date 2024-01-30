@@ -1,4 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  CustomTextField,
+  DotSpinner,
+  SubmitButton
+} from '@/components/General';
+import MultipleSelect from '@/components/General/MultipleSelect';
 import { useAppDispatch } from '@/context';
 import { showSnackbar } from '@/context/slices/snackbarSlice';
 import { apiHandler } from '@/utils';
@@ -7,15 +13,13 @@ import { Button, Grid, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { CustomTextField, DotSpinner, SubmitButton } from '../General';
-import MultipleSelect from '../General/MultipleSelect';
 import {
   activityType,
   unitGroup,
   unitGroupSERVICES,
   unitType
 } from './saleUnitEnum';
-
+import GrayDotSpinner from '../General/DotSpinnerGray';
 
 interface SaleData {
   unitType: string;
@@ -164,6 +168,7 @@ export default function SaleUnitOne(props: SaleUnitProps) {
   const handleSelectedStreetListChange = (newValues: string[]) => {
     setSelectedStreetList(newValues);
   };
+  
   const handleAddPhoneNumber = () => {
     setPhoneNumbers((prevPhoneNumbers) => [...prevPhoneNumbers, '']);
   };
@@ -433,7 +438,7 @@ export default function SaleUnitOne(props: SaleUnitProps) {
                 )}
               />
             ) : (
-              <DotSpinner />
+              <GrayDotSpinner />
             )}
 
             {cityList ? (
@@ -454,7 +459,7 @@ export default function SaleUnitOne(props: SaleUnitProps) {
                 )}
               />
             ) : (
-              <DotSpinner />
+              <GrayDotSpinner />
             )}
 
             {streetList ? (
@@ -475,7 +480,7 @@ export default function SaleUnitOne(props: SaleUnitProps) {
                 )}
               />
             ) : (
-              <DotSpinner />
+              <GrayDotSpinner />
             )}
 
             <Controller

@@ -6,7 +6,6 @@ import { Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import Media from './SaleUnitCard';
-// import SaleUnitCard from './SaleUnitCard';
 
 export default function UserSaleUnits() {
   const dispatch = useAppDispatch();
@@ -15,9 +14,8 @@ export default function UserSaleUnits() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getWithToken('/saleUnit/user?page=0&size=10', 'GET')
+    getWithToken('/saleUnit/user?page=0&size=20', 'GET')
       .then((res: any) => {
-        console.log('object', res.content);
         setData(res.content);
       })
       .catch((err: { message: any }) => {
@@ -43,11 +41,15 @@ export default function UserSaleUnits() {
   }, []);
 
   return (
-    <Grid container display={'flex'}>
+    <Grid container display={'flex'} xs={12} justifyContent={'flex-start'}>
       {loading ? (
         <Media loading={loading} />
       ) : (
-        data.map((k, index) => <Media key={index} loading={loading} data={k} />)
+        data.map((k, index) => (
+          <Grid item key={index} xs={4}>
+            <Media loading={loading} data={k} />
+          </Grid>
+        ))
       )}
     </Grid>
   );

@@ -79,6 +79,8 @@ export const unitGroupSERVICES = [
   }
 ];
 
+export const allUnitGroup = unitGroupSERVICES.concat(unitGroup);
+
 export const activityType = [
   {
     label: 'حقیقی',
@@ -89,5 +91,3 @@ export const activityType = [
     value: 'LEGAL'
   }
 ];
-
-
