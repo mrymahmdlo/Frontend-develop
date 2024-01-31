@@ -153,9 +153,13 @@ export default function SaleUnitById(id: any) {
   const onSubmit: SubmitHandler<SaleData> = (form) => {
     const request = {
       ...form,
+      phoneNumbers: phoneNumbers,
       streetId: selectedStreetList.toString()
     };
     setShowSpinner(true);
+    // const hasChanges = Object.keys(form).some((key) => form[key] !== data[key]);
+
+    // apiHandler('/saleUnit', 'PUT', hasChanges ? request : data, true)
     apiHandler('/saleUnit', 'PUT', request, true)
       .then((res) => {
         setData(res);
@@ -205,6 +209,7 @@ export default function SaleUnitById(id: any) {
               <Controller
                 control={control}
                 name='unitType'
+                defaultValue={data?.unitType}
                 render={() => (
                   <CustomTextField
                     inputWidth='26.25rem !important'
@@ -221,6 +226,7 @@ export default function SaleUnitById(id: any) {
               <Controller
                 control={control}
                 name='activityType'
+                defaultValue={data?.activityType}
                 render={() => (
                   <CustomTextField
                     inputWidth='26.25rem !important'
@@ -238,6 +244,7 @@ export default function SaleUnitById(id: any) {
                 <Controller
                   control={control}
                   name='unitGroup'
+                  defaultValue={data?.unitGroup}
                   render={() => (
                     <CustomTextField
                       inputWidth='26.25rem !important'
