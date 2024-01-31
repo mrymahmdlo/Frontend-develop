@@ -1,3 +1,3 @@
 export default function DotSpinner() {
-  return <div className='dot-pulse'></div>;
+  return <div className='dot-pulse'>vvvv</div>;
 }

@@ -53,7 +53,17 @@ export default function AuthWrapper(props: AuthContainerProps) {
           )}
         </Hidden>
         {props.fillContainer ? (
-          props.children
+          <Box className={classes.AuthContainerBody}>
+            {props.BackComponent ? (
+              <Hidden mdDown>
+                <Box className={classes.AuthFormLink}>
+                  {props.BackComponent}
+                </Box>
+              </Hidden>
+            ) : null}
+
+            {props.children}
+          </Box>
         ) : (
           <Grid container className={classes.AuthContainerBody}>
             <Grid item sm={12} md={6} className={classes.AuthForm}>

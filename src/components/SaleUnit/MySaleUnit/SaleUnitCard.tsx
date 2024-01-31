@@ -1,8 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { DotSpinner } from '@/components/General';
+import { useAppDispatch } from '@/context';
+import { hideModal, showModal } from '@/context/slices/modalSlice';
+import { showSnackbar } from '@/context/slices/snackbarSlice';
+import deleteWithToken from '@/utils/deleteWithToken';
 import getWithToken from '@/utils/getWithToken';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { CardActionArea, Divider, Grid } from '@mui/material';
+import {
+  Button,
+  CardActionArea,
+  Divider,
+  Grid,
+  Menu,
+  MenuItem
+} from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
@@ -10,10 +22,21 @@ import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import * as React from 'react';
 import { activityType, unitType } from '../saleUnitEnum';
 
+const options = [
+  {
+    label: 'به‌روزرسانی واحد صنفی',
+    value: 'UPDATE'
+  },
+  {
+    label: 'حذف واحد صنفی',
+    value: 'DELETE'
+  }
+];
 interface MediaProps {
   loading?: boolean;
   data?: {
@@ -31,6 +54,7 @@ interface MediaProps {
       saleUnitDocumentType: string;
     }[];
   };
+  onDeleteSaleUnit?: (saleUnitId: number | undefined) => void;
 }
 
 interface Address {
@@ -61,8 +85,11 @@ export default function Media(props: MediaProps) {
   const [defaultFile, setDefaultFile] = React.useState<File | null>(null);
   const [defaultPic, setDefaultPic] = React.useState<File | null>(null);
   const [address, setAddress] = React.useState<Address>();
+  const [showSpinner, setShowSpinner] = React.useState(false);
 
+  const dispatch = useAppDispatch();
   const router = useRouter();
+  const t = useTranslations();
 
   React.useEffect(() => {
     if (data?.streetId) {
@@ -118,6 +145,86 @@ export default function Media(props: MediaProps) {
     }
   }, []);
 
+  const deleteSaleUnit = () => {
+    setShowSpinner(true);
+
+    deleteWithToken(`/saleUnit/${data?.id}`, 'DELETE')
+      .then(() => {
+        props.onDeleteSaleUnit && props.onDeleteSaleUnit(data?.id);
+        dispatch(hideModal());
+        dispatch(
+          showSnackbar({
+            message: 'واحد صنفی حذف شد',
+            severity: 'success'
+          })
+        );
+      })
+      .catch((err) => {
+        if (err.message) {
+          dispatch(
+            showSnackbar({
+              message: t(err.message),
+              severity: 'error'
+            })
+          );
+        } else {
+          dispatch(
+            showSnackbar({
+              message: t('Error 500'),
+              severity: 'error'
+            })
+          );
+        }
+      })
+      .finally(() => setShowSpinner(false));
+  };
+
+  const onDelete = () => {
+    dispatch(
+      showModal({
+        modalState: true,
+        modalContent: (
+          <Grid container display={'grid'} justifyItems={'center'}>
+            <Typography>
+              آیا از حذف واحد صنفی {data?.name} اطمینان دارید؟
+            </Typography>
+            <Button
+              variant='contained'
+              fullWidth
+              color='primary'
+              onClick={deleteSaleUnit}
+              sx={{ margin: 2 }}
+            >
+              {showSpinner ? <DotSpinner /> : 'بله'}
+            </Button>
+          </Grid>
+        )
+      })
+    );
+  };
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const open = Boolean(anchorEl);
+  const handleClickListItem = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuItemClick = (
+    event: React.MouseEvent<HTMLElement>,
+    option: { label: string; value: string },
+    index: number
+  ) => {
+    setSelectedIndex(index);
+    setAnchorEl(null);
+    option.value === 'DELETE' && onDelete();
+    option.value === 'UPDATE' && router.push(`/sale-unit/${data?.id}`);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Card style={{ width: 'inherit' }} sx={{ maxWidth: 345, m: 2 }}>
       <CardActionArea>
@@ -140,12 +247,39 @@ export default function Media(props: MediaProps) {
           // }
           action={
             loading ? null : (
-              <IconButton
-                onClick={() => router.push(`/sale-unit/${data?.id}`)}
-                aria-label='settings'
-              >
-                <MoreVertIcon />
-              </IconButton>
+              <>
+                <IconButton
+                  aria-label='more'
+                  id='long-button'
+                  aria-controls={open ? 'long-menu' : undefined}
+                  aria-expanded={open ? 'true' : undefined}
+                  aria-haspopup='true'
+                  onClick={handleClickListItem}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+                <Menu
+                  id='long-menu'
+                  MenuListProps={{
+                    'aria-labelledby': 'long-button'
+                  }}
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  {options.map((option, index) => (
+                    <MenuItem
+                      key={option.value}
+                      selected={index === selectedIndex}
+                      onClick={(event) =>
+                        handleMenuItemClick(event, option, index)
+                      }
+                    >
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </>
             )
           }
           title={

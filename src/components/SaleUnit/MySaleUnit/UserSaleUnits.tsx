@@ -40,14 +40,22 @@ export default function UserSaleUnits() {
       });
   }, []);
 
+  const handleDeleteSaleUnit = (saleUnitId: number | undefined) => {
+    setData((prevData) => prevData.filter((item) => item.id !== saleUnitId));
+  };
+
   return (
     <Grid container display={'flex'} xs={12} justifyContent={'flex-start'}>
       {loading ? (
         <Media loading={loading} />
       ) : (
-        data.map((k, index) => (
+        data.map((data, index) => (
           <Grid item key={index} xs={4}>
-            <Media loading={loading} data={k} />
+            <Media
+              loading={loading}
+              data={data}
+              onDeleteSaleUnit={handleDeleteSaleUnit}
+            />
           </Grid>
         ))
       )}

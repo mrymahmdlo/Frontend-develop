@@ -153,7 +153,7 @@ export default function SaleUnitById(id: any) {
   const onSubmit: SubmitHandler<SaleData> = (form) => {
     const request = {
       ...form,
-      phoneNumbers: phoneNumbers,
+      id: data?.id,
       streetId: selectedStreetList.toString()
     };
     setShowSpinner(true);
@@ -446,7 +446,7 @@ export default function SaleUnitById(id: any) {
                           inputWidth='26.25rem !important'
                           label={index ? `تلفن ${index + 1}` : 'تلفن'}
                           value={value}
-                          defaultValue={phoneNumbers}
+                          defaultValue={phoneNumber}
                           onChange={(e) => {
                             const newValue = e.target.value;
                             onChange(newValue);

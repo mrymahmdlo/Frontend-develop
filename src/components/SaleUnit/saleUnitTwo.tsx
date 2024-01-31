@@ -133,10 +133,10 @@ export default function SaleUnitTwo(response: any) {
           variant='contained'
           color='primary'
           onClick={() => {
-            router.push('/');
+            router.push('/sale-unit/my-sale-unit');
           }}
         >
-          صفحه اصلی
+          واحدهای صنفی من
         </Button>
       </Grid>
     </>
