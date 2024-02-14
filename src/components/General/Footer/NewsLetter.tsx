@@ -26,6 +26,7 @@ function NewsLetter() {
           </Typography>
         </Grid>
         <Grid
+          container
           xs={12}
           sm={12}
           md={5}
@@ -39,7 +40,7 @@ function NewsLetter() {
             sx={(theme) => ({
               width: '100%',
               '& label': {
-                color: `${alpha(theme.palette.gray.main,1)} !important`,
+                color: `${alpha(theme.palette.gray.main, 1)} !important`,
                 height: '60px',
                 right: 0,
                 marginRight: '2em',
@@ -73,6 +74,7 @@ function NewsLetter() {
             })}
             label={
               <Grid
+                container
                 direction={'row-reverse'}
                 display={'flex'}
                 justifyContent={'space-between'}

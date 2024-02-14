@@ -1,40 +1,15 @@
 'use client';
 
 import { Icon } from '@/components/General';
-import { useAppDispatch } from '@/context';
-import { showSnackbar } from '@/context/slices/snackbarSlice';
+import LogOut from '@/components/LogOut';
 import theme from '@/lib/ThemeRegistery/theme';
-import { apiHandler } from '@/utils';
-import {
-  getAppToken,
-  removeAppToken,
-  removeCurrentAccountCookie
-} from '@/utils/tokenHandler';
+import { getAppToken } from '@/utils/tokenHandler';
 import { Avatar, Button, Grid, IconButton } from '@mui/material';
 import { useRouter } from 'next/navigation';
 
 export default function HeaderMenu() {
   const router = useRouter();
   const tokens = getAppToken();
-  const dispatch = useAppDispatch();
-
-  const logOut = async () => {
-    apiHandler('/user/logout', 'POST', {}, true)
-      .then(() => {
-        removeCurrentAccountCookie();
-        removeAppToken();
-        dispatch(
-          showSnackbar({
-            message: 'شما از حساب کاربری خود خارج شدید',
-            severity: 'success'
-          })
-        );
-        router.push('/');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   if (tokens) {
     return (
@@ -61,7 +36,8 @@ export default function HeaderMenu() {
           </IconButton>
         </Grid>
         <Grid item>
-          <IconButton onClick={logOut} aria-haspopup='true' color='inherit'>
+          <LogOut />
+          {/* <IconButton onClick={logOut} aria-haspopup='true' color='inherit'>
             <Avatar
               sx={{
                 background: 'transparent',
@@ -70,7 +46,7 @@ export default function HeaderMenu() {
             >
               <Icon name='logOut' h={24} w={24} />
             </Avatar>
-          </IconButton>
+          </IconButton> */}
         </Grid>
       </Grid>
     );

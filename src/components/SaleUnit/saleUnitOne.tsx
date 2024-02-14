@@ -13,13 +13,13 @@ import { Button, Grid, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import GrayDotSpinner from '../General/DotSpinnerGray';
 import {
   activityType,
   unitGroup,
   unitGroupSERVICES,
   unitType
 } from './saleUnitEnum';
-import GrayDotSpinner from '../General/DotSpinnerGray';
 
 interface SaleData {
   unitType: string;
@@ -168,7 +168,7 @@ export default function SaleUnitOne(props: SaleUnitProps) {
   const handleSelectedStreetListChange = (newValues: string[]) => {
     setSelectedStreetList(newValues);
   };
-  
+
   const handleAddPhoneNumber = () => {
     setPhoneNumbers((prevPhoneNumbers) => [...prevPhoneNumbers, '']);
   };
@@ -247,179 +247,209 @@ export default function SaleUnitOne(props: SaleUnitProps) {
         onSubmit={handleSubmit(onSubmit)}
       >
         <Grid container pt={6}>
-          <Grid item xs={12} md={6} gap={3} container>
-            <Controller
-              control={control}
-              name='unitType'
-              render={() => (
-                <>
-                  <MultipleSelect
-                    label='نوع واحد صنفی'
-                    isMulti={false}
-                    options={unitType.map((k) => k.value)}
-                    showInput={unitType.map((k) => k.label)}
-                    value={selectedUnitType}
-                    onChange={handleSelectedUnitTypeChange}
-                  />
-                </>
-              )}
-            />
-
+          <Grid item xs={12} md={6} display={'block'} container>
+            <div style={{ margin: '0 0 24px 0' }}>
+              <Controller
+                control={control}
+                name='unitType'
+                render={() => (
+                  <>
+                    <MultipleSelect
+                      label='نوع واحد صنفی'
+                      isMulti={false}
+                      options={unitType.map((k) => k.value)}
+                      showInput={unitType.map((k) => k.label)}
+                      value={selectedUnitType}
+                      onChange={handleSelectedUnitTypeChange}
+                    />
+                  </>
+                )}
+              />
+            </div>
             {isShowActivity ? (
-              <Controller
-                control={control}
-                name='activityType'
-                render={() => (
-                  <>
-                    <MultipleSelect
-                      label='نوع فعالیت'
-                      isMulti={false}
-                      options={activityType.map((k) => k.value)}
-                      showInput={activityType.map((k) => k.label)}
-                      value={selectedActivityType}
-                      onChange={handleSelectedActivityTypeChange}
-                    />
-                  </>
-                )}
-              />
+              <div style={{ margin: '0 0 24px 0' }}>
+                <Controller
+                  control={control}
+                  name='activityType'
+                  render={() => (
+                    <>
+                      <MultipleSelect
+                        label='نوع فعالیت'
+                        isMulti={false}
+                        options={activityType.map((k) => k.value)}
+                        showInput={activityType.map((k) => k.label)}
+                        value={selectedActivityType}
+                        onChange={handleSelectedActivityTypeChange}
+                      />
+                    </>
+                  )}
+                />
+              </div>
             ) : (
-              <Controller
-                control={control}
-                name='activityType'
-                render={() => (
-                  <>
-                    <MultipleSelect
-                      label='نوع فعالیت'
-                      isMulti={false}
-                      options={['LEGAL']}
-                      showInput={['حقوقی']}
-                      value={selectedActivityType}
-                      onChange={handleSelectedActivityTypeChange}
-                    />
-                  </>
-                )}
-              />
+              <div style={{ margin: '0 0 24px 0' }}>
+                <Controller
+                  control={control}
+                  name='activityType'
+                  render={() => (
+                    <>
+                      <MultipleSelect
+                        label='نوع فعالیت'
+                        isMulti={false}
+                        options={['LEGAL']}
+                        showInput={['حقوقی']}
+                        value={selectedActivityType}
+                        onChange={handleSelectedActivityTypeChange}
+                      />
+                    </>
+                  )}
+                />
+              </div>
             )}
-
             {!isShowGroup ? (
               isOptionGroup ? (
-                <Controller
-                  control={control}
-                  name='unitGroup'
-                  render={() => (
-                    <>
-                      <MultipleSelect
-                        label='گروه واحد صنفی'
-                        isMulti={false}
-                        options={unitGroup.map((k) => k.value)}
-                        showInput={unitGroup.map((k) => k.label)}
-                        value={selectedUnitGroup}
-                        onChange={handleSelectedUnitGroupChange}
-                      />
-                    </>
-                  )}
-                />
+                <div style={{ margin: '0 0 24px 0' }}>
+                  <Controller
+                    control={control}
+                    name='unitGroup'
+                    render={() => (
+                      <>
+                        <MultipleSelect
+                          label='گروه واحد صنفی'
+                          isMulti={false}
+                          options={unitGroup.map((k) => k.value)}
+                          showInput={unitGroup.map((k) => k.label)}
+                          value={selectedUnitGroup}
+                          onChange={handleSelectedUnitGroupChange}
+                        />
+                      </>
+                    )}
+                  />
+                </div>
               ) : (
-                <Controller
-                  control={control}
-                  name='unitGroup'
-                  render={() => (
-                    <>
-                      <MultipleSelect
-                        label='گروه واحد صنفی'
-                        isMulti={false}
-                        options={unitGroupSERVICES.map((k) => k.value)}
-                        showInput={unitGroupSERVICES.map((k) => k.label)}
-                        value={selectedUnitGroup}
-                        onChange={handleSelectedUnitGroupChange}
-                      />
-                    </>
-                  )}
-                />
+                <div style={{ margin: '0 0 24px 0' }}>
+                  <Controller
+                    control={control}
+                    name='unitGroup'
+                    render={() => (
+                      <>
+                        <MultipleSelect
+                          label='گروه واحد صنفی'
+                          isMulti={false}
+                          options={unitGroupSERVICES.map((k) => k.value)}
+                          showInput={unitGroupSERVICES.map((k) => k.label)}
+                          value={selectedUnitGroup}
+                          onChange={handleSelectedUnitGroupChange}
+                        />
+                      </>
+                    )}
+                  />
+                </div>
               )
             ) : null}
-
             {isLicenseNo && isLegal ? (
-              <Controller
-                control={control}
-                name='licenseNo'
-                render={({ field: { onChange, value } }) => (
-                  <CustomTextField
-                    inputWidth='26.25rem !important'
-                    label='شماره پروانه بهره برداری  '
-                    value={value}
-                    onChange={(e) => {
-                      const newValue = e.target.value;
-                      onChange(newValue);
-                    }}
-                    autoComplete='true'
-                    errorMessage={errors.licenseNo?.message}
-                  />
-                )}
-              />
+              <div style={{ margin: '0 0 24px 0', display: 'flex' }}>
+                <Controller
+                  control={control}
+                  name='licenseNo'
+                  render={({ field: { onChange, value } }) => (
+                    <CustomTextField
+                      inputWidth='26.25rem !important'
+                      label='شماره پروانه بهره برداری  '
+                      value={value}
+                      onChange={(e) => {
+                        const newValue = e.target.value;
+                        onChange(newValue);
+                      }}
+                      autoComplete='true'
+                      errorMessage={errors.licenseNo?.message}
+                    />
+                  )}
+                />
+              </div>
             ) : null}
-
             {isRegistrationNo && isLegal ? (
-              <Controller
-                control={control}
-                name='registrationNo'
-                render={({ field: { onChange, value } }) => (
-                  <CustomTextField
-                    inputWidth='26.25rem !important'
-                    label='شماره ثبت شرکت'
-                    value={value}
-                    onChange={(e) => {
-                      const newValue = e.target.value;
-                      onChange(newValue);
-                    }}
-                    autoComplete='true'
-                    errorMessage={errors.registrationNo?.message}
-                  />
-                )}
-              />
+              <div style={{ margin: '0 0 24px 0', display: 'flex' }}>
+                <Controller
+                  control={control}
+                  name='registrationNo'
+                  render={({ field: { onChange, value } }) => (
+                    <CustomTextField
+                      inputWidth='26.25rem !important'
+                      label='شماره ثبت شرکت'
+                      value={value}
+                      onChange={(e) => {
+                        const newValue = e.target.value;
+                        onChange(newValue);
+                      }}
+                      autoComplete='true'
+                      errorMessage={errors.registrationNo?.message}
+                    />
+                  )}
+                />
+              </div>
             ) : null}
-
             {isOperationLicenseNo && isReal ? (
-              <Controller
-                control={control}
-                name='operationLicenseNo'
-                render={({ field: { onChange, value } }) => (
-                  <CustomTextField
-                    inputWidth='26.25rem !important'
-                    label='شماره جواز کسب'
-                    value={value}
-                    onChange={(e) => {
-                      const newValue = e.target.value;
-                      onChange(newValue);
-                    }}
-                    autoComplete='true'
-                    errorMessage={errors.operationLicenseNo?.message}
-                  />
-                )}
-              />
+              <div style={{ margin: '0 0 24px 0', display: 'flex' }}>
+                <Controller
+                  control={control}
+                  name='operationLicenseNo'
+                  render={({ field: { onChange, value } }) => (
+                    <CustomTextField
+                      inputWidth='26.25rem !important'
+                      label='شماره جواز کسب'
+                      value={value}
+                      onChange={(e) => {
+                        const newValue = e.target.value;
+                        onChange(newValue);
+                      }}
+                      autoComplete='true'
+                      errorMessage={errors.operationLicenseNo?.message}
+                    />
+                  )}
+                />
+              </div>
             ) : null}
-
             {isMerchantCardNo ? (
-              <Controller
-                control={control}
-                name='merchantCardNo'
-                render={({ field: { onChange, value } }) => (
-                  <CustomTextField
-                    inputWidth='26.25rem !important'
-                    label='شماره کارت بازرگانی'
-                    value={value}
-                    onChange={(e) => {
-                      const newValue = e.target.value;
-                      onChange(newValue);
-                    }}
-                    autoComplete='true'
-                    errorMessage={errors.merchantCardNo?.message}
-                  />
-                )}
-              />
+              <div style={{ margin: '0 0 24px 0', display: 'flex' }}>
+                <Controller
+                  control={control}
+                  name='merchantCardNo'
+                  render={({ field: { onChange, value } }) => (
+                    <CustomTextField
+                      inputWidth='26.25rem !important'
+                      label='شماره کارت بازرگانی'
+                      value={value}
+                      onChange={(e) => {
+                        const newValue = e.target.value;
+                        onChange(newValue);
+                      }}
+                      autoComplete='true'
+                      errorMessage={errors.merchantCardNo?.message}
+                    />
+                  )}
+                />
+              </div>
             ) : null}
           </Grid>
           <Grid item xs={12} md={6} gap={3} container>
+            <Controller
+              control={control}
+              name='name'
+              render={({ field: { onChange, value } }) => (
+                <CustomTextField
+                  inputWidth='26.25rem !important'
+                  label='نام کسب و کار '
+                  value={value}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    onChange(newValue);
+                  }}
+                  autoComplete='true'
+                  errorMessage={errors.name?.message}
+                />
+              )}
+            />
+
             {proviceList ? (
               <Controller
                 control={control}
@@ -501,24 +531,6 @@ export default function SaleUnitOne(props: SaleUnitProps) {
               )}
             />
 
-            <Controller
-              control={control}
-              name='name'
-              render={({ field: { onChange, value } }) => (
-                <CustomTextField
-                  inputWidth='26.25rem !important'
-                  label='نام کسب و کار '
-                  value={value}
-                  onChange={(e) => {
-                    const newValue = e.target.value;
-                    onChange(newValue);
-                  }}
-                  autoComplete='true'
-                  errorMessage={errors.name?.message}
-                />
-              )}
-            />
-
             {phoneNumbers.map((phoneNumber, index) => (
               <Grid item key={index}>
                 <Controller
@@ -575,6 +587,7 @@ export default function SaleUnitOne(props: SaleUnitProps) {
                   errorMessage={errors.bio?.message}
                   multiline
                   maxRows={4}
+                  minRows={2}
                 />
               )}
             />

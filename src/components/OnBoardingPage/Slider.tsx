@@ -24,7 +24,7 @@ export default function Slider() {
       height: 360,
       width: 512,
       header: 'عاملین برق',
-      subHeader: '  الکترونیک ، الکتریک ، صنعت',
+      subHeader: 'الکترونیک ، الکتریک ، صنعت',
       text: 'واردکننده یا صادرکننده تولیدکنندگان'
     }
   ];

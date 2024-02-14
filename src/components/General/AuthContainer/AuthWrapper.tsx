@@ -53,7 +53,7 @@ export default function AuthWrapper(props: AuthContainerProps) {
           )}
         </Hidden>
         {props.fillContainer ? (
-          <Box className={classes.AuthContainerBody}>
+          <Box width={'100%'} className={classes.AuthContainerBody}>
             {props.BackComponent ? (
               <Hidden mdDown>
                 <Box className={classes.AuthFormLink}>
