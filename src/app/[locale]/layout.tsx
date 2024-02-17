@@ -1,4 +1,5 @@
 import '@/assets/styleSheets/main.modules.scss';
+import 'ol/ol.css';
 import ThemeRegistry from '@/lib/ThemeRegistery';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';

@@ -16,6 +16,7 @@ import classes from '@/assets/styleSheets/General/AuthContainer.module.scss';
 // assets
 import Cover from '@/assets/images/Cover.png';
 import { AuthContainerProps } from '.';
+import SubMenu from '../Header/SubMenu';
 
 export default function AuthWrapper(props: AuthContainerProps) {
   const t = useTranslations();
@@ -33,6 +34,7 @@ export default function AuthWrapper(props: AuthContainerProps) {
           <Grid container sx={{ display: props.hideHeader ? 'none' : 'flex' }}>
             <MainHeader />
           </Grid>
+          <SubMenu />
         </Hidden>
         <Hidden mdUp>
           {!props.hideMobileHeader && (
