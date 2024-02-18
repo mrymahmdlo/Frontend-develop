@@ -9,6 +9,7 @@ import Icon from '@/components/General/Icon';
 // styles
 import classes from '@/assets/styleSheets/help-center.module.scss';
 import MapComponent from '../General/MapComponent';
+import AddressFeature from '../General/MapComponent/addressFeature';
 
 export default function ContactUsPage() {
   const router = useRouter();
@@ -50,7 +51,7 @@ export default function ContactUsPage() {
             <Grid item xs={1} md={2}></Grid>
           </Grid>
           <Grid item>
-            <Typography>
+            <Typography mb={3}>
               کاربر گرامی، لطفاً در صورت وجود هرگونه سوال یا ابهامی، پیش از
               ارسال ایمیل یا تماس تلفنی با دیجی بـرق، بخش قوانین و مقررات را
               ملاحظه فرمایید و در صورتی که پاسخ خود را نیافتید، با ما تماس
@@ -58,6 +59,9 @@ export default function ContactUsPage() {
             </Typography>
           </Grid>
           <MapComponent />
+          <Grid item mt={3}>
+            <AddressFeature />
+          </Grid>
         </Grid>
       </Card>
     </div>

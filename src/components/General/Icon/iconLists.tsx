@@ -1,4 +1,5 @@
 import WhiteLogo from '@/assets/svgs/Logo-white.svg';
+import Address from '@/assets/svgs/address.svg';
 import Aparat from '@/assets/svgs/aparat.svg';
 import Apple from '@/assets/svgs/apple.svg';
 import {
@@ -43,8 +44,10 @@ import Men from '@/assets/svgs/men.svg';
 import Meta from '@/assets/svgs/meta.svg';
 import Netflix from '@/assets/svgs/netflix.svg';
 import Notification from '@/assets/svgs/notification.svg';
+import PhoneNum from '@/assets/svgs/phone.svg';
 import Plus from '@/assets/svgs/plus.svg';
 import Point from '@/assets/svgs/point.svg';
+import PostalCard from '@/assets/svgs/postalCard.svg';
 import Search from '@/assets/svgs/search.svg';
 import SelectArrow from '@/assets/svgs/select-arrow.svg';
 import Shiba from '@/assets/svgs/shiba.svg';
@@ -58,7 +61,6 @@ import Unisex from '@/assets/svgs/unisex.svg';
 import User from '@/assets/svgs/user.svg';
 import WhiteApple from '@/assets/svgs/white-apple.svg';
 import Women from '@/assets/svgs/women.svg';
-
 export const icons = {
   apple: <Apple />,
   aparat: <Aparat />,
@@ -117,7 +119,10 @@ export const icons = {
   danger: <Danger />,
   tickCircle: <TickCircle />,
   user: <User />,
-  logOut: <LogOut />
+  logOut: <LogOut />,
+  address: <Address />,
+  postalCard: <PostalCard />,
+  phoneNum: <PhoneNum />
 };
 
 export type IconsListType = keyof typeof icons;
