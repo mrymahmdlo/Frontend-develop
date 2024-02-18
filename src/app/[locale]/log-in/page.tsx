@@ -18,6 +18,7 @@ export default function SignUp() {
         </Link>
       }
       hideNewsLetter
+      hideHeader
     >
       <LogInInputs />
     </AuthContainer>

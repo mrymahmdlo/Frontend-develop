@@ -108,36 +108,40 @@ export default function Media(props: MediaProps) {
         data.saleUnitDocuments
           .filter((k) => k.saleUnitDocumentType === 'PROFILE')
           .map((doc) => (attachmentAvatarId = doc.attachmentId));
-        try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/file/getFile?attachmentId=${attachmentAvatarId}`
-          );
-          if (response.ok) {
-            const blob = await response.blob();
-            setDefaultFile(new File([blob], 'filename'));
-          } else {
-            console.error('Failed to fetch image:', response.statusText);
+        if (attachmentAvatarId) {
+          try {
+            const response = await fetch(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/file/getFile?attachmentId=${attachmentAvatarId}`
+            );
+            if (response.ok) {
+              const blob = await response.blob();
+              setDefaultFile(new File([blob], 'filename'));
+            } else {
+              console.error('Failed to fetch image:', response.statusText);
+            }
+          } catch (error) {
+            console.error('Error fetching image:', error);
           }
-        } catch (error) {
-          console.error('Error fetching image:', error);
         }
       };
       const fetchImageNo = async () => {
         data.saleUnitDocuments
           .filter((k) => k.saleUnitDocumentType !== 'PROFILE')
           .map((doc) => (attachmentNoId = doc.attachmentId));
-        try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/file/getFile?attachmentId=${attachmentNoId}`
-          );
-          if (response.ok) {
-            const blob = await response.blob();
-            setDefaultPic(new File([blob], 'filename'));
-          } else {
-            console.error('Failed to fetch image:', response.statusText);
+        if (attachmentNoId) {
+          try {
+            const response = await fetch(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/file/getFile?attachmentId=${attachmentNoId}`
+            );
+            if (response.ok) {
+              const blob = await response.blob();
+              setDefaultPic(new File([blob], 'filename'));
+            } else {
+              console.error('Failed to fetch image:', response.statusText);
+            }
+          } catch (error) {
+            console.error('Error fetching image:', error);
           }
-        } catch (error) {
-          console.error('Error fetching image:', error);
         }
       };
       fetchImageAvatar();
@@ -238,11 +242,7 @@ export default function Media(props: MediaProps) {
           //       height={40}
           //     />
           //   ) : (
-          //     <Avatar
-          //       alt='avatar'
-          //       style={{ marginLeft: '0.5rem' }}
-          //       src={defaultFile ? URL.createObjectURL(defaultFile) : ''}
-          //     />
+          //     <Button>ثبت محصول</Button>
           //   )
           // }
           action={
@@ -298,11 +298,23 @@ export default function Media(props: MediaProps) {
             loading ? (
               <Skeleton animation='wave' height={10} width='40%' />
             ) : (
-              <div style={{ color: '#1da1f3' }}>
-                {data?.unitType && getUnitTypeLabel(data?.unitType)}
-                <br />
-                {data?.activityType && getActivityTypeLabel(data?.activityType)}
-              </div>
+              <>
+                <div style={{ color: '#1da1f3' }}>
+                  {data?.unitType && getUnitTypeLabel(data?.unitType)}
+                  <br />
+                  {data?.activityType &&
+                    getActivityTypeLabel(data?.activityType)}
+                </div>
+                <div>
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    style={{ height: '0.5rem', backgroundColor: 'orange' }}
+                  >
+                    ثبت محصول
+                  </Button>
+                </div>
+              </>
             )
           }
         />
@@ -316,8 +328,11 @@ export default function Media(props: MediaProps) {
           <CardMedia
             component='img'
             height='140'
-            image={defaultFile ? URL.createObjectURL(defaultFile) : ''}
-            // image={defaultPic ? URL.createObjectURL(defaultPic) : ''}
+            image={
+              defaultFile
+                ? URL.createObjectURL(defaultFile)
+                : '/assets/images/slide1.png'
+            }
           />
         )}
         <CardContent>
@@ -337,7 +352,6 @@ export default function Media(props: MediaProps) {
               </Typography>
               {address?.id && (
                 <>
-                  <Divider />
                   <Grid container display={'flex'} gap={3}>
                     {address.city.province.id && (
                       <Grid item display={'flex'} gap={1}>

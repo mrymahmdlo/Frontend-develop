@@ -13,6 +13,7 @@ export default function SignUpPage() {
   return (
     <AuthContainer
       hideNewsLetter
+      hideHeader
       BackComponent={
         <Link href='/'>
           <Icon name='flashRight' w={18} h={18} view='0 0 24 24' />

@@ -1,4 +1,5 @@
-import { getAppToken } from './tokenHandler';
+import apiHandler from './apiHandler';
+import { getAppToken, removeAppToken, setAppToken } from './tokenHandler';
 
 type ApiMethodType = 'GET';
 
@@ -63,6 +64,38 @@ export default async function getWithToken(
       throw err; // Rethrow the original error
     }
   }
+
+    if (res.status === 401) {
+      const tokens = getAppToken();
+
+      // Call refresh token service
+      try {
+        if (tokens) {
+          const refreshToken = JSON.parse(tokens);
+          if (refreshToken) {
+            apiHandler('/user/refresh', 'POST', {
+              refreshToken: refreshToken.refresh
+            })
+              .then((res) =>
+                setAppToken({
+                  access: res.accessToken,
+                  refresh: res.refreshToken
+                })
+              )
+              .catch(() => {
+                removeAppToken();
+                window.location.reload();
+              });
+          }
+        }
+        // Retry the request with the new token
+        return await apiHandler(uri, method);
+      } catch (refreshError) {
+        console.error('Error refreshing access token:', refreshError);
+        throw refreshError;
+      }
+    }
+
 
   const error = await res.json();
   console.error('API error response:', error);

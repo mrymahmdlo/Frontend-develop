@@ -1,4 +1,4 @@
-import { getAppToken } from './tokenHandler';
+import { getAppToken, removeAppToken, setAppToken } from './tokenHandler';
 
 type ApiMethodType = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
@@ -66,6 +66,37 @@ export default async function apiHandler(
   if (res.status === 204) {
     // No content, return null or handle accordingly
     return null;
+  }
+
+  if (res.status === 401) {
+    const tokens = getAppToken();
+
+    // Call refresh token service
+    try {
+      if (tokens) {
+        const refreshToken = JSON.parse(tokens);
+        if (refreshToken) {
+          apiHandler('/user/refresh', 'POST', {
+            refreshToken: refreshToken.refresh
+          })
+            .then((res) =>
+              setAppToken({
+                access: res.accessToken,
+                refresh: res.refreshToken
+              })
+            )
+            .catch(() => {
+              removeAppToken();
+              window.location.reload();
+            });
+        }
+      }
+      // Retry the request with the new token
+      return await apiHandler(uri, method, data, authRequired);
+    } catch (refreshError) {
+      console.error('Error refreshing access token:', refreshError);
+      throw refreshError;
+    }
   }
 
   if (res.status < 400) {
