@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { DotSpinner } from '@/components/General';
 import { useAppDispatch } from '@/context';
@@ -97,7 +96,7 @@ export default function Media(props: MediaProps) {
         .then((res: any) => {
           setAddress(res);
         })
-        .catch((err) => {
+        .catch((err:any) => {
           console.error(err);
         });
     }
@@ -163,7 +162,7 @@ export default function Media(props: MediaProps) {
           })
         );
       })
-      .catch((err) => {
+      .catch((err:any) => {
         if (err.message) {
           dispatch(
             showSnackbar({

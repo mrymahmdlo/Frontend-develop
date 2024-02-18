@@ -42,7 +42,7 @@ export default function VerificationCodeForm({
       mobile: identifier,
       password: otp.value
     })
-      .then((res) => {
+      .then((res:any) => {
         setAppToken({ access: res.accessToken, refresh: res.refreshToken });
         setCurrentAccountCookie(res.profile);
         dispatch(
@@ -53,7 +53,7 @@ export default function VerificationCodeForm({
         );
         router.push('/');
       })
-      .catch((err) => {
+      .catch((err:any) => {
         if (err.message) {
           dispatch(
             showSnackbar({

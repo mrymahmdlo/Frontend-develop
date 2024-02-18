@@ -62,7 +62,7 @@ const ModalButton = () => {
         router.refresh();
         router.push('/');
       })
-      .catch((err) => {
+      .catch((err:any) => {
         console.log(err);
       });
   };

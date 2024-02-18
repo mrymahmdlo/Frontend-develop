@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   CustomTextField,
   DotSpinner,
@@ -103,7 +102,7 @@ export default function SaleUnitById(id: any) {
           getAllStreet(res.city.id);
           setSelectedStreetList(res.id);
         })
-        .catch((err) => {
+        .catch((err:any) => {
           console.error(err);
         });
     }
@@ -111,10 +110,10 @@ export default function SaleUnitById(id: any) {
 
   const getAllStreet = (id: string) => {
     getWithToken(`/street/byCity/${id}?page=0&size=50`, 'GET')
-      .then((res) => {
+      .then((res:any) => {
         setStreetList(res.content);
       })
-      .catch((err) => {
+      .catch((err:any) => {
         console.error('err', err);
       });
   };
@@ -161,7 +160,7 @@ export default function SaleUnitById(id: any) {
 
     // apiHandler('/saleUnit', 'PUT', hasChanges ? request : data, true)
     apiHandler('/saleUnit', 'PUT', request, true)
-      .then((res) => {
+      .then((res:any) => {
         setData(res);
         setPhoneNumbers(res.phoneNumbers);
         getStreet(res.streetId);
@@ -172,7 +171,7 @@ export default function SaleUnitById(id: any) {
           })
         );
       })
-      .catch((err) => {
+      .catch((err:any) => {
         if (err.message) {
           dispatch(
             showSnackbar({

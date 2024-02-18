@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAppDispatch } from '@/context';
 import { showSnackbar } from '@/context/slices/snackbarSlice';
 import getWithToken from '@/utils/getWithToken';

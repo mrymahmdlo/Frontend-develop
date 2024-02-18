@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAppDispatch } from '@/context';
 import { showSnackbar } from '@/context/slices/snackbarSlice';
 import {
@@ -178,7 +177,7 @@ export default function Profile() {
   useEffect(() => {
     if (id)
       apiHandler(`/user/${id}`, 'GET', true)
-        .then((res) => {
+        .then((res: any) => {
           setProfile(res);
           setBirthDate(gregorianToPersianDate(res.birthdate));
 
@@ -202,7 +201,7 @@ export default function Profile() {
             fetchImage();
           }
         })
-        .catch((err) => {
+        .catch((err: any) => {
           console.error('err', err);
         });
   }, [id, setValue]);

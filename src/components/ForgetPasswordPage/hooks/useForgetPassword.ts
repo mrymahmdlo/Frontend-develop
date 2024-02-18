@@ -47,7 +47,7 @@ export default function useForgetPassword() {
         );
         setStage('send-otp');
       })
-      .catch((err) => {
+      .catch((err:any) => {
         if (err.message) {
           dispatch(
             showSnackbar({
@@ -89,7 +89,7 @@ export default function useForgetPassword() {
       .then(() => {
         router.push('/log-in');
       })
-      .catch((err) => {
+      .catch((err:any) => {
         if (err.message) {
           dispatch(
             showSnackbar({

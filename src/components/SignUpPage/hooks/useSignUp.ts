@@ -39,7 +39,7 @@ export default function useSignUp() {
     apiHandler('/user/signup', 'POST', {
       mobile: user
     })
-      .then((res) => {
+      .then((res:any) => {
         dispatch(
           showSnackbar({
             message: t('A new code has been sent to'),
@@ -49,7 +49,7 @@ export default function useSignUp() {
         setStage('otp');
         setId(res.id);
       })
-      .catch((err) => {
+      .catch((err:any) => {
         console.log(err);
         if (err.message) {
           dispatch(
@@ -94,7 +94,7 @@ export default function useSignUp() {
       .then(() => {
         router.push('/profile');
       })
-      .catch((err) => {
+      .catch((err:any) => {
         if (err.message) {
           dispatch(
             showSnackbar({

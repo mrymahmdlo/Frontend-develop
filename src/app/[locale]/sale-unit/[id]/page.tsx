@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { AuthContainer, Icon } from '@/components/General';
 import SaleUnitById from '@/components/SaleUnit/SaleUnitById';
@@ -12,7 +11,6 @@ interface Params {
 }
 
 export default function SaleUniId(params: Params) {
-
   return (
     <AuthContainer
       BackComponent={

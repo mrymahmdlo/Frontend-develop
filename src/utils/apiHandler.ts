@@ -25,7 +25,7 @@ export default async function apiHandler(
   method: ApiMethodType = 'GET',
   data?: unknown,
   authRequired?: boolean
-) {
+): Promise<any> {
   const headers: HeadersInit = {};
 
   if (authRequired) {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAppDispatch } from '@/context';
 import { showSnackbar } from '@/context/slices/snackbarSlice';
 import { apiHandler } from '@/utils';
@@ -31,7 +30,7 @@ export default function SaleUnitTwo(response: any) {
           })
         );
       })
-      .catch((err) => {
+      .catch((err:any) => {
         if (err.message) {
           dispatch(
             showSnackbar({
@@ -67,7 +66,7 @@ export default function SaleUnitTwo(response: any) {
         );
         setIsUpload(true);
       })
-      .catch((err) => {
+      .catch((err:any) => {
         if (err.message) {
           dispatch(
             showSnackbar({

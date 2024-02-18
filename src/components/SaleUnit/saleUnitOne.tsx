@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   CustomTextField,
   DotSpinner,
@@ -142,10 +141,10 @@ export default function SaleUnitOne(props: SaleUnitProps) {
   const handleSelectedProviceListChange = (newValues: string[]) => {
     setSelectedProviceList(newValues);
     getWithToken(`/city/byProvince/${newValues}?page=0&size=50`, 'GET')
-      .then((res) => {
+      .then((res:any) => {
         setCityList(res.content);
       })
-      .catch((err) => {
+      .catch((err:any) => {
         console.error('err', err);
       });
   };
@@ -155,10 +154,10 @@ export default function SaleUnitOne(props: SaleUnitProps) {
   const handleSelectedCityListChange = (newValues: string[]) => {
     setSelectedCityList(newValues);
     getWithToken(`/street/byCity/${newValues}?page=0&size=50`, 'GET')
-      .then((res) => {
+      .then((res:any) => {
         setStreetList(res.content);
       })
-      .catch((err) => {
+      .catch((err:any) => {
         console.error('err', err);
       });
   };
@@ -181,10 +180,10 @@ export default function SaleUnitOne(props: SaleUnitProps) {
 
   useEffect(() => {
     getWithToken(`/province?page=0&size=50`, 'GET')
-      .then((res) => {
+      .then((res:any) => {
         setProviceList(res.content);
       })
-      .catch((err) => {
+      .catch((err:any) => {
         console.error('err', err);
       });
   }, []);
@@ -207,7 +206,7 @@ export default function SaleUnitOne(props: SaleUnitProps) {
 
     setShowSpinner(true);
     apiHandler('/saleUnit', 'POST', request, true)
-      .then((res) => {
+      .then((res:any) => {
         props.unitOne(res);
 
         dispatch(
@@ -217,7 +216,7 @@ export default function SaleUnitOne(props: SaleUnitProps) {
           })
         );
       })
-      .catch((err) => {
+      .catch((err:any) => {
         if (err.message) {
           dispatch(
             showSnackbar({
